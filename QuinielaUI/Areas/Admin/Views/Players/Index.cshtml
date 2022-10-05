@@ -1,0 +1,63 @@
+﻿@using QuinielaUI.Areas.Admin.Models
+@model List<PlayerDTO>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Jugadores</h1>
+<div class="divider"></div>
+@if (User.IsInRole("AddAdminUsers"))
+{
+    <div class="container col-12">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newModal">
+            Nuevo Jugador
+        </button>
+    </div>
+    <div class="divider"></div>
+}
+<div id="PlayerTableContainer" class="container col-12">
+    @Html.Partial("_PlayersTable")
+</div>
+
+
+<div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newModalLabel">Agregar jugador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="name" placeholder="ej. ftrejo">
+                        <div id="UnhandedError" class="invalid-feedback" style="display: none;">
+                            Error al crear al usuario
+                        </div>
+                        <div id="NameEmpty" class="invalid-feedback" style="display: none;">
+                            Debes indicar el nombre de usuario
+                        </div>
+                        <div id="AlreadyExist" class="invalid-feedback" style="display: none;">
+                            El usuario ya existe
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="AddPLayer()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="sucessToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+            Se agrego correctamente el jugador <b id="newPLayer"></b>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/scripts/Areas/Admin/Scripts/Players/default.js"></script>

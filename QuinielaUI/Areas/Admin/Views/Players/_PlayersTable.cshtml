@@ -1,0 +1,33 @@
+﻿@using QuinielaUI.Areas.Admin.Models
+@model List<PlayerDTO>
+<table id="PlayersTable" class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre Usuario</th>
+            @if (User.IsInRole("GenerateLinkAdminUsers"))
+            {
+                <th scope="col">Link</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PlayerDTO playerDTO in Model)
+        {
+            <tr class="@(playerDTO.Id == ViewBag.NewPLayerId?"table-success":"")">
+                <th scope="row">@(playerDTO.Id)</th>
+                <td>@(playerDTO.Name)</td>
+                @if (User.IsInRole("GenerateLinkAdminUsers"))
+                {
+                    <td scope="col">
+                        <button id="GeneralLinkButton_@(playerDTO.Id)" type="button" class="btn btn-primary generalLinkButton" onclick="GenerateLink(@(playerDTO.Id))">
+                            <div class="original">Generar Link</div>
+                            <div class="result" style="display: none;"> Copiado </div>
+                        </button>
+                    </td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</table>
