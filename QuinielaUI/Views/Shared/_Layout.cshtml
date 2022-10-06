@@ -24,16 +24,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Player" asp-controller="Quinielas" asp-action="Index">Administrar Jugadores</a>
+                            <a class="nav-link text-dark" asp-area="Player" asp-controller="Quinielas" asp-action="Index">Mis quinielas</a>
                         </li>
-                        @{
-                            if (User.IsInRole("ViewAdminUsers"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Players" asp-action="Index">Administrar Jugadores</a>
-                                </li>
-                            }
+                        @if (User.IsInRole("ViewAdminUsers"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administrar
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @if (User.IsInRole("ViewAdminUsers"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Players" asp-action="Index">Administrar Jugadores</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
                         }
+
                     </ul>
                 </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">

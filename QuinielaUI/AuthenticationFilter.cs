@@ -20,6 +20,11 @@ namespace QuinielaUI
     {
         private readonly QuinielaContext _quinielaContext;
         private readonly string _activity;
+
+        public AuthenticationFilter()
+        {
+        }
+
         public AuthenticationFilter(string activity)
         {
             _activity = activity;
@@ -54,9 +59,7 @@ namespace QuinielaUI
 
                 if (isValid)
                 {
-
                     context.HttpContext.Response.Headers.Add("playerId", playerId.ToString());
-                    context.HttpContext.User.IsInRole("asd");
                 }
             }
 
@@ -67,6 +70,7 @@ namespace QuinielaUI
                     context.Result = new RedirectToRouteResult(
                                         new RouteValueDictionary
                                             {
+                                                {"area","" },
                                                 { "action", "Unauthorized" },
                                                 { "controller", "Error" }
                                             }

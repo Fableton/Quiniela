@@ -16,7 +16,7 @@ namespace QuinielaUI
 
         public override bool IsInRole(string role)
         {
-            return _roles.Contains(role); ;
+            return role == null || _roles.Contains(role); ;
         }
     }
     public class IdentityCustom : IIdentity

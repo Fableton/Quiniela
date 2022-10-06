@@ -1,17 +1,9 @@
 ﻿using Castle.Core.Internal;
-using Entities;
-using Entities.Auths;
 using Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using QuinielaUI.Areas.Admin.Models;
-using QuinielaUI.Controllers;
 using QuinielaUI.Models;
 using Respository;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuinielaUI.Areas.Admin.Controllers
 {
@@ -71,12 +63,12 @@ namespace QuinielaUI.Areas.Admin.Controllers
 
             if (!name.IsNullOrEmpty())
             {
-                Player player = _quinielaContext.Players.FirstOrDefault(p => p.Name == name);
+                Entities.Player player = _quinielaContext.Players.FirstOrDefault(p => p.Name == name);
                 if (player == null)
                 {
                     try
                     {
-                        player = new Player()
+                        player = new Entities.Player()
                         {
                             Name = name,
                             Rols = _quinielaContext.Rols.Where(r => r.Id == "Player").ToList()
@@ -128,7 +120,7 @@ namespace QuinielaUI.Areas.Admin.Controllers
                 errors = new List<string>() { "UnhandedError" }
             };
 
-            Player player = _quinielaContext.Players.Find(playerId);
+            Entities.Player player = _quinielaContext.Players.Find(playerId);
             if (player != null)
             {
                 HelperJWT helper = new HelperJWT();

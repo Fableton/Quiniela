@@ -1,0 +1,161 @@
+﻿@using QuinielaUI.Areas.Player.Models
+@model List<QuinielaDTO>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .quinielasContainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-evenly;
+        column-gap: 10px;
+        grid-row-gap: 23px;
+    }
+
+    .quiniela {
+        padding: 5px;
+        border-radius: 20px;
+        border-style: solid;
+        border-width: 2px;
+        box-shadow: 5px;
+        border-color: #f4bc2f;
+        min-width: 300px;
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+
+        .quiniela.ended {
+            filter: grayscale(50%) opacity(50%);
+            -webkit-filter: grayscale(50%) opacity(50%);
+            -moz-filter: grayscale(50%) opacity(50%);
+        }
+
+        .quiniela.odd {
+            background-color: red;
+        }
+
+    .quinielaHeader {
+        padding-bottom: 15px;
+    }
+
+        .quinielaHeader .edit {
+            background-color: #f4bc2f;
+            float: right;
+            right: 5px;
+            width: 60px;
+            height: 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            border-width: 0;
+        }
+
+    .quinielaResult {
+        text-align: center;
+    }
+
+    .tournamentName {
+        font-weight: bold;
+        font-size: large;
+        padding: 7px;
+    }
+
+    .quinielaName {
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+        padding: 7px;
+    }
+
+    .match .title {
+        display: grid;
+        grid-template-columns: 20px 40% 10% 40%;
+        justify-items: center;
+    }
+
+        .match .title img {
+            width: 30px;
+            height: 20px;
+        }
+
+    .playerResult {
+        display: flex;
+        gap: 3px;
+        justify-content: center;
+    }
+
+</style>
+
+<h1>Mis quinielas</h1>
+<div class="divider"></div>
+<div class="quinielasContainer">
+    @foreach (QuinielaDTO quiniela in Model)
+    {
+        <div class="quiniela @(quiniela.Ended?" ended":"")">
+            <div class="quinielaHeader">
+                @if (!quiniela.Ended)
+                {
+                    <button class="edit">
+                        Editar
+                    </button>
+                }
+                <div class="tournamentName">
+                    @(quiniela.TournamentName)
+                </div>
+                <div class="quinielaName">
+                    @(quiniela.Id)) @(quiniela.Name)
+                </div>
+                @if (!quiniela.Ended)
+                {
+                    <div>
+                        Tienas hasta el <b>@(quiniela.EndDate.ToString("ddd dd MMM"))</b>
+                        para participar.
+                    </div>
+                }
+                else
+                {
+                    <div class="quinielaResult">
+                        <b> Le has atinado a @(quiniela.Hits) de @(quiniela.NumberOfMatches) </b>
+                    </div>
+                }
+            </div>
+            <div class="collapse details_@(quiniela.Id) show" data-bs-toggle="collapse" href=".details_@(quiniela.Id)" style="text-align:center">ver detalle</div>
+            <div class="collapse details_@(quiniela.Id)" data-bs-toggle="collapse" href=".details_@(quiniela.Id)" style="text-align:center">ocultar detalle</div>
+            <div class="matchesContainer collapse details_@(quiniela.Id)">
+                @foreach (MatchesResumeDTO match in quiniela.MatchesResume)
+                {
+                    <div class="match">
+                        <div class="title">
+                            <div>@(match.Id))</div>
+                            <div><img src="~/img/flags/@(match.LocalId).svg"> @(match.LocalId) (@(match.LocalGoals))</div>
+                            <div>V.S.</div>
+                            <div><img src="~/img/flags/@(match.VisitorId).svg"> @(match.VisitorId) (@(match.VisitorGoals))</div>
+                        </div>
+                        @if (match.PlayerResult != null)
+                        {
+                            <div class="playerResult">
+                                Has elegido que
+                                @switch (match.PlayerResult)
+                                {
+                                    case 1:
+                                        <div class="result">
+                                            <b>gana @(match.LocalName)</b>
+                                        </div>
+                                        break;
+                                    case 2:
+                                        <div class="result"><b>gana @(match.VisitorName)</b></div>
+                                        break;
+                                    case 3:
+                                        <div class="result"> <b>empatan</b></div>
+                                        break;
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -30,6 +30,8 @@ namespace Entities
 
         public int QuinielaId { get; set; }
 
+        public bool Ended { get; set; }
+
         [ForeignKey("VisitorId")]
         public virtual Team Visitor { get; set; }
         [ForeignKey("LocalId")]

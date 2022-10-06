@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Respository;
 
@@ -11,9 +12,10 @@ using Respository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(QuinielaContext))]
-    partial class QuinielaContextModelSnapshot : ModelSnapshot
+    [Migration("20221005204504_EndedMatch")]
+    partial class EndedMatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -433,7 +435,7 @@ namespace Repository.Migrations
                             Id = 1,
                             EndDate = new DateTime(2022, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jornada 1",
-                            StartDate = new DateTime(2022, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2022, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
                         },
                         new
@@ -441,7 +443,7 @@ namespace Repository.Migrations
                             Id = 2,
                             EndDate = new DateTime(2022, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jornada 2",
-                            StartDate = new DateTime(2022, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
                         },
                         new
@@ -449,7 +451,7 @@ namespace Repository.Migrations
                             Id = 3,
                             EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jornada 3",
-                            StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2022, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
                         });
                 });

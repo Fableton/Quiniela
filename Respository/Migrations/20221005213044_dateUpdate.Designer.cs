@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Respository;
 
@@ -11,9 +12,10 @@ using Respository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(QuinielaContext))]
-    partial class QuinielaContextModelSnapshot : ModelSnapshot
+    [Migration("20221005213044_dateUpdate")]
+    partial class dateUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

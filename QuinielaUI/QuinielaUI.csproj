@@ -124,6 +124,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Player\Data\" />
+    <Folder Include="Areas\Player\Scripts\" />
   </ItemGroup>
 
   <ItemGroup>

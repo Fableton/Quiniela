@@ -130,9 +130,9 @@ namespace Respository
                 );
 
             modelBuilder.Entity<Quiniela>().HasData(
-                new Quiniela() { Id = 1, StartDate = new DateTime(2022, 09, 30), EndDate = new DateTime(2022, 11, 19), TournamentId = 1, Name = "Jornada 1" },
-                 new Quiniela() { Id = 2, StartDate = new DateTime(2022, 11, 30), EndDate = new DateTime(2022, 11, 25), TournamentId = 1, Name = "Jornada 2" },
-                 new Quiniela() { Id = 3, StartDate = new DateTime(2022, 09, 29), EndDate = new DateTime(2022, 11, 28), TournamentId = 1, Name = "Jornada 3" }
+                new Quiniela() { Id = 1, StartDate = new DateTime(2022, 10, 05), EndDate = new DateTime(2022, 11, 19), TournamentId = 1, Name = "Jornada 1" },
+                 new Quiniela() { Id = 2, StartDate = new DateTime(2022, 11, 25), EndDate = new DateTime(2022, 11, 25), TournamentId = 1, Name = "Jornada 2" },
+                 new Quiniela() { Id = 3, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 11, 28), TournamentId = 1, Name = "Jornada 3" }
                 );
 
             modelBuilder.Entity<MatchGame>().HasData(
