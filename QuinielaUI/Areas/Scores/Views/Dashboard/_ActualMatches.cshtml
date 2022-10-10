@@ -25,6 +25,16 @@
         justify-items: center;
     }
 
+        .actualMatch_ItemCointainer .flag {
+            justify-self: end;
+            padding-right: 5px;
+        }
+
+        .actualMatch_ItemCointainer .goal {
+            justify-self: start;
+            padding-left: 3px;
+        }
+
         .actualMatch_ItemCointainer .dateItem {
             grid-area: mDate;
         }
@@ -43,6 +53,8 @@
 
         .actualMatch_ItemCointainer .mVersItem {
             grid-area: mVers;
+            padding-left: 13px;
+            padding-right: 13px;
         }
 
         .actualMatch_ItemCointainer .vFlagItem {
@@ -66,8 +78,12 @@
         }
 
         .actualMatch_ItemCointainer img {
-            width: 40px;
+            width: 46px;
             height: 30px;
+            border-color: black;
+            border-width: 1px;
+            border-style: solid;
+            background-color: black;
         }
 
     .roundedicon {
@@ -87,12 +103,12 @@
             {
                 <div class="dateItem">@match.StartDate.ToString("dddd dd") - @match.StartDate.ToString("HH:mm") hrs</div>
             }
-            <div class="lFlagItem" style="grid-area:lFlag"><img src="~/img/flags/@(match.LocalID).svg"></div>
-            <div class="lGoalItem">(@match.LocalGoals)</div>
+            <div class="lFlagItem flag" style="grid-area:lFlag"><img src="~/img/flags/@(match.LocalID).svg"></div>
+            <div class="lGoalItem goal">(@match.LocalGoals)</div>
             <div class="lnameItem">@match.LocalName</div>
             <div class="mVersItem">V.S.</div>
-            <div class="vFlagItem"><img src="~/img/flags/@(match.VisitorID).svg"></div>
-            <div class="vGoalItem">(@match.VisitorGoals)</div>
+            <div class="vFlagItem flag"><img src="~/img/flags/@(match.VisitorID).svg"></div>
+            <div class="vGoalItem goal">(@match.VisitorGoals)</div>
             <div class="vnameItem">@match.VisitorName</div>
             <div class="resulItem">
 
