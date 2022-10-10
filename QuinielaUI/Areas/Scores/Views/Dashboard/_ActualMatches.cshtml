@@ -1,0 +1,144 @@
+﻿@using QuinielaUI.Areas.Scores.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Match>
+@{
+}
+
+<style>
+    .actualMatch_ItemCointainer {
+    }
+
+    .actualMatch_ItemCointainer {
+        display: grid;
+        grid-template-areas: "mDate mDate mDate mDate mDate"
+            "lFlag lGoal mVers vFlag vGoal"
+            "lname lname mVers vname vname"
+            "resul resul resul resul resul"
+            ". . emote . .";
+        border-radius: 20px;
+        border-color: #FDD800;
+        border-width: 2px;
+        border-style: solid;
+        margin: 5px;
+        padding: 10px;
+        align-items: center;
+        justify-items: center;
+    }
+
+        .actualMatch_ItemCointainer .dateItem {
+            grid-area: mDate;
+        }
+
+        .actualMatch_ItemCointainer .lFlagItem {
+            grid-area: lFlag;
+        }
+
+        .actualMatch_ItemCointainer .lGoalItem {
+            grid-area: lGoal;
+        }
+
+        .actualMatch_ItemCointainer .lnameItem {
+            grid-area: lname;
+        }
+
+        .actualMatch_ItemCointainer .mVersItem {
+            grid-area: mVers;
+        }
+
+        .actualMatch_ItemCointainer .vFlagItem {
+            grid-area: vFlag;
+        }
+
+        .actualMatch_ItemCointainer .vGoalItem {
+            grid-area: vGoal;
+        }
+
+        .actualMatch_ItemCointainer .vnameItem {
+            grid-area: vname;
+        }
+
+        .actualMatch_ItemCointainer .resulItem {
+            grid-area: resul;
+        }
+
+        .actualMatch_ItemCointainer .emoteItem {
+            grid-area: emote;
+        }
+
+        .actualMatch_ItemCointainer img {
+            width: 40px;
+            height: 30px;
+        }
+
+    .roundedicon {
+    }
+</style>
+@if (Model.Count != 0)
+{
+    @foreach (Match match in Model)
+    {
+        <div style="display:none">@match.MatchId</div>
+        <div class="actualMatch_ItemCointainer">
+            @if (match.Ended)
+            {
+                <div class="dateItem"><b>Termino</b></div>
+            }
+            else
+            {
+                <div class="dateItem">@match.StartDate.ToString("dddd dd") - @match.StartDate.ToString("HH:mm") hrs</div>
+            }
+            <div class="lFlagItem" style="grid-area:lFlag"><img src="~/img/flags/@(match.LocalID).svg"></div>
+            <div class="lGoalItem">(@match.LocalGoals)</div>
+            <div class="lnameItem">@match.LocalName</div>
+            <div class="mVersItem">V.S.</div>
+            <div class="vFlagItem"><img src="~/img/flags/@(match.VisitorID).svg"></div>
+            <div class="vGoalItem">(@match.VisitorGoals)</div>
+            <div class="vnameItem">@match.VisitorName</div>
+            <div class="resulItem">
+
+                @if (match.PlayerResult == 1)
+                {
+
+                    <div> Tu elegiste que <b>gana @(match.LocalName)</b></div>
+
+                }
+                else if (match.PlayerResult == 2)
+                {
+
+                    <div> Tu elegiste que  <b>gana @(match.VisitorName)</b></div>
+
+                }
+                else if (match.PlayerResult == 3)
+                {
+                    <div>Tu elegiste que <b>empatan</b></div>
+                }
+                else if (match.PlayerResult == null)
+                {
+                    <div><b>No participaste</b></div>
+                }
+
+            </div>
+            <div class="emoteItem">
+                @if (match.IsWining == true)
+                {
+                    <i class="bi bi-emoji-smile-fill" style="font-size: 2rem; color:#FDD800 ;"></i>
+                }
+                else if (match.IsWining == false)
+                {
+                    <i class="bi bi-emoji-frown-fill" style="font-size: 2rem; color: #F0483E;"></i>
+                }
+                else
+                {
+                    <i class="bi bi-emoji-expressionless-fill" style="font-size: 2rem; color: gray;"></i>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div>
+        <i class="bi bi-bell-slash-fill" style="font-size: 1rem; color: #F0483E;"></i>
+        No hay partidos recientes
+    </div>
+}

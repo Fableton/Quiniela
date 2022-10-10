@@ -59,7 +59,10 @@ namespace QuinielaUI
 
                 if (isValid)
                 {
-                    context.HttpContext.Response.Headers.Add("playerId", playerId.ToString());
+                    if (context.HttpContext.Response.Headers["playerId"].IsNullOrEmpty())
+                    {
+                        context.HttpContext.Response.Headers.Add("playerId", playerId.ToString());
+                    }
                 }
             }
 

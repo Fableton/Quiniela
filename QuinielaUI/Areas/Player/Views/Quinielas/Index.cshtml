@@ -1,4 +1,5 @@
 ﻿@using QuinielaUI.Areas.Player.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model List<QuinielaDTO>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +11,7 @@
         flex-wrap: wrap;
         align-content: stretch;
         justify-content: space-evenly;
-        column-gap: 10px;
+        column-gap: 25px;
         grid-row-gap: 23px;
     }
 
@@ -22,6 +23,7 @@
         box-shadow: 5px;
         border-color: #f4bc2f;
         min-width: 300px;
+        height: 100%;
         box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
         -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -50,6 +52,10 @@
             border-radius: 30px;
             cursor: pointer;
             border-width: 0;
+            text-align: center;
+            color: black;
+            text-decoration-line: none;
+            line-height: 40px;
         }
 
     .quinielaResult {
@@ -73,6 +79,7 @@
         display: grid;
         grid-template-columns: 20px 40% 10% 40%;
         justify-items: center;
+        padding-bottom: 5px;
     }
 
         .match .title img {
@@ -97,9 +104,7 @@
             <div class="quinielaHeader">
                 @if (!quiniela.Ended)
                 {
-                    <button class="edit">
-                        Editar
-                    </button>
+                    <a class="edit" asp-area="Player" asp-controller="Quinielas" asp-action="Edit" asp-route-quinielaId="@(quiniela.Id)">Editar</a>
                 }
                 <div class="tournamentName">
                     @(quiniela.TournamentName)
@@ -137,19 +142,21 @@
                         {
                             <div class="playerResult">
                                 Has elegido que
-                                @switch (match.PlayerResult)
+                                @if (match.PlayerResult == 1)
                                 {
-                                    case 1:
-                                        <div class="result">
-                                            <b>gana @(match.LocalName)</b>
-                                        </div>
-                                        break;
-                                    case 2:
-                                        <div class="result"><b>gana @(match.VisitorName)</b></div>
-                                        break;
-                                    case 3:
-                                        <div class="result"> <b>empatan</b></div>
-                                        break;
+                                    <div class="result">
+                                        <b>gana @(match.LocalName)</b>
+                                    </div>
+                                }
+                                else if (match.PlayerResult == 2)
+                                {
+                                    <div class="result">
+                                        <b>gana @(match.VisitorName)</b>
+                                    </div>
+                                }
+                                else if (match.PlayerResult == 3)
+                                {
+                                    <div class="result"> <b>empatan</b></div>
                                 }
                             </div>
                         }

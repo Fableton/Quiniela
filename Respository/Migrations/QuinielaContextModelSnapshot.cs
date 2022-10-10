@@ -152,7 +152,7 @@ namespace Repository.Migrations
                         {
                             Id = 1,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "A",
                             LocalGoals = 0,
@@ -165,7 +165,7 @@ namespace Repository.Migrations
                         {
                             Id = 2,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 21, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "A",
                             LocalGoals = 0,
@@ -178,7 +178,7 @@ namespace Repository.Migrations
                         {
                             Id = 3,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 21, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "B",
                             LocalGoals = 0,
@@ -191,7 +191,7 @@ namespace Repository.Migrations
                         {
                             Id = 4,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 21, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "B",
                             LocalGoals = 0,
@@ -204,7 +204,7 @@ namespace Repository.Migrations
                         {
                             Id = 5,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 22, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "C",
                             LocalGoals = 0,
@@ -217,7 +217,7 @@ namespace Repository.Migrations
                         {
                             Id = 6,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 22, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "C",
                             LocalGoals = 0,
@@ -230,7 +230,7 @@ namespace Repository.Migrations
                         {
                             Id = 7,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 22, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "D",
                             LocalGoals = 0,
@@ -243,7 +243,7 @@ namespace Repository.Migrations
                         {
                             Id = 8,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 22, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "D",
                             LocalGoals = 0,
@@ -256,7 +256,7 @@ namespace Repository.Migrations
                         {
                             Id = 9,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 23, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "E",
                             LocalGoals = 0,
@@ -269,7 +269,7 @@ namespace Repository.Migrations
                         {
                             Id = 10,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 23, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "E",
                             LocalGoals = 0,
@@ -282,7 +282,7 @@ namespace Repository.Migrations
                         {
                             Id = 11,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 23, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "F",
                             LocalGoals = 0,
@@ -295,7 +295,7 @@ namespace Repository.Migrations
                         {
                             Id = 12,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 23, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "F",
                             LocalGoals = 0,
@@ -308,7 +308,7 @@ namespace Repository.Migrations
                         {
                             Id = 13,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 24, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "G",
                             LocalGoals = 0,
@@ -321,7 +321,7 @@ namespace Repository.Migrations
                         {
                             Id = 14,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 24, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "G",
                             LocalGoals = 0,
@@ -334,7 +334,7 @@ namespace Repository.Migrations
                         {
                             Id = 15,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 24, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "H",
                             LocalGoals = 0,
@@ -347,7 +347,7 @@ namespace Repository.Migrations
                         {
                             Id = 16,
                             CanDraw = true,
-                            Date = new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 11, 24, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
                             Group = "H",
                             LocalGoals = 0,
@@ -355,6 +355,630 @@ namespace Repository.Migrations
                             QuinielaId = 1,
                             VisitorGoals = 0,
                             VisitorId = "KOR"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 25, 4, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "B",
+                            LocalGoals = 0,
+                            LocalId = "WAL",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "IRN"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 25, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "A",
+                            LocalGoals = 0,
+                            LocalId = "QAT",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "SEN"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "A",
+                            LocalGoals = 0,
+                            LocalId = "NED",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "ECU"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 25, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "B",
+                            LocalGoals = 0,
+                            LocalId = "ENG",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "USA"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 26, 4, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "D",
+                            LocalGoals = 0,
+                            LocalId = "TUN",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "AUS"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 26, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "C",
+                            LocalGoals = 0,
+                            LocalId = "POL",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "KSA"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "D",
+                            LocalGoals = 0,
+                            LocalId = "FRA",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "DEN"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "C",
+                            LocalGoals = 0,
+                            LocalId = "ARG",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "MEX"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 27, 4, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "E",
+                            LocalGoals = 0,
+                            LocalId = "JPN",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "CRC"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 27, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "F",
+                            LocalGoals = 0,
+                            LocalId = "BEL",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "MAR"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "F",
+                            LocalGoals = 0,
+                            LocalId = "CRO",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "CAN"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "E",
+                            LocalGoals = 0,
+                            LocalId = "ESP",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "GER"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 28, 4, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "G",
+                            LocalGoals = 0,
+                            LocalId = "CMR",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "SRB"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 28, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "H",
+                            LocalGoals = 0,
+                            LocalId = "KOR",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "GHA"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 28, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "G",
+                            LocalGoals = 0,
+                            LocalId = "BRA",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "SUI"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 28, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "H",
+                            LocalGoals = 0,
+                            LocalId = "POR",
+                            QuinielaId = 2,
+                            VisitorGoals = 0,
+                            VisitorId = "URU"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "A",
+                            LocalGoals = 0,
+                            LocalId = "ECU",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "SEN"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "A",
+                            LocalGoals = 0,
+                            LocalId = "NED",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "QAT"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 29, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "B",
+                            LocalGoals = 0,
+                            LocalId = "IRN",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "USA"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 29, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "B",
+                            LocalGoals = 0,
+                            LocalId = "WAL",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "ENG"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "D",
+                            LocalGoals = 0,
+                            LocalId = "TUN",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "FRA"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "D",
+                            LocalGoals = 0,
+                            LocalId = "AUS",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "DEN"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 30, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "C",
+                            LocalGoals = 0,
+                            LocalId = "POL",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "ARG"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 11, 30, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "C",
+                            LocalGoals = 0,
+                            LocalId = "KSA",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "MEX"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "F",
+                            LocalGoals = 0,
+                            LocalId = "CRO",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "BEL"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "F",
+                            LocalGoals = 0,
+                            LocalId = "CAN",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "MAR"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 1, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "E",
+                            LocalGoals = 0,
+                            LocalId = "JPN",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "ESP"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 1, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "E",
+                            LocalGoals = 0,
+                            LocalId = "CRC",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "GER"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "H",
+                            LocalGoals = 0,
+                            LocalId = "KOR",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "POR"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "H",
+                            LocalGoals = 0,
+                            LocalId = "GHA",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "URU"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 2, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "G",
+                            LocalGoals = 0,
+                            LocalId = "SRB",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "SUI"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            CanDraw = true,
+                            Date = new DateTime(2022, 12, 2, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "G",
+                            LocalGoals = 0,
+                            LocalId = "CMR",
+                            QuinielaId = 3,
+                            VisitorGoals = 0,
+                            VisitorId = "BRA"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 3, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 51,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 4, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 52,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 4, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 53,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 54,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 55,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 56,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 6, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 4,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 57,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 9, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 5,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 58,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 9, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 5,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 59,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 5,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 60,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 10, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 5,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 61,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 13, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 6,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 62,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 14, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 6,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 63,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 7,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
+                        },
+                        new
+                        {
+                            Id = 64,
+                            CanDraw = false,
+                            Date = new DateTime(2022, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ended = false,
+                            Group = "",
+                            LocalGoals = 0,
+                            LocalId = "N/A",
+                            QuinielaId = 7,
+                            VisitorGoals = 0,
+                            VisitorId = "N/A"
                         });
                 });
 
@@ -451,6 +1075,38 @@ namespace Repository.Migrations
                             Name = "Jornada 3",
                             StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Octavos de final",
+                            StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TournamentId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Cuartos de final",
+                            StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TournamentId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Semifinal",
+                            StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TournamentId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Finales",
+                            StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TournamentId = 1
                         });
                 });
 
@@ -471,8 +1127,48 @@ namespace Repository.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "KSA",
+                            Name = "Arabia Saudita"
+                        },
+                        new
+                        {
+                            Id = "ARG",
+                            Name = "Argentina"
+                        },
+                        new
+                        {
+                            Id = "BRA",
+                            Name = "Brasil"
+                        },
+                        new
+                        {
                             Id = "QAT",
                             Name = "Catar"
+                        },
+                        new
+                        {
+                            Id = "CRC",
+                            Name = "CostaRica"
+                        },
+                        new
+                        {
+                            Id = "CAN",
+                            Name = "Canada"
+                        },
+                        new
+                        {
+                            Id = "CRO",
+                            Name = "Croacia"
+                        },
+                        new
+                        {
+                            Id = "CMR",
+                            Name = "Camerun"
+                        },
+                        new
+                        {
+                            Id = "KOR",
+                            Name = "Corea del Sur"
                         },
                         new
                         {
@@ -511,18 +1207,8 @@ namespace Repository.Migrations
                         },
                         new
                         {
-                            Id = "ARG",
-                            Name = "Argentina"
-                        },
-                        new
-                        {
                             Id = "MEX",
                             Name = "Mexico"
-                        },
-                        new
-                        {
-                            Id = "KSA",
-                            Name = "Arabia Saudita"
                         },
                         new
                         {
@@ -561,11 +1247,6 @@ namespace Repository.Migrations
                         },
                         new
                         {
-                            Id = "CRC",
-                            Name = "CostaRica"
-                        },
-                        new
-                        {
                             Id = "JPN",
                             Name = "Japon"
                         },
@@ -581,28 +1262,8 @@ namespace Repository.Migrations
                         },
                         new
                         {
-                            Id = "CAN",
-                            Name = "Canada"
-                        },
-                        new
-                        {
-                            Id = "CRO",
-                            Name = "Croacia"
-                        },
-                        new
-                        {
                             Id = "SUI",
                             Name = "Suiza"
-                        },
-                        new
-                        {
-                            Id = "BRA",
-                            Name = "Brasil"
-                        },
-                        new
-                        {
-                            Id = "CMR",
-                            Name = "Camerun"
                         },
                         new
                         {
@@ -626,8 +1287,8 @@ namespace Repository.Migrations
                         },
                         new
                         {
-                            Id = "KOR",
-                            Name = "Corea del Sur"
+                            Id = "N/A",
+                            Name = "Por definir"
                         });
                 });
 

@@ -2,8 +2,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
+<style type="text/css">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    .dashboardSection .title {
+        background-color: #F8A11E;
+        display: table;
+        border-style: solid;
+        border-radius: 9px;
+        border-color: #F8A11E;
+        border-end-end-radius: 0px;
+        border-end-start-radius: 0px;
+        padding-right: 10px;
+        font-size: larger;
+        color: white;
+        font-weight: bold;
+    }
+
+    .dashboardItem {
+        position: relative;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 13px;
+        border-color: #F8A11E;
+        padding: 10px;
+        border-start-start-radius: 0px;
+        min-width: 250px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+        .dashboardItem .default {
+            filter: blur(4px);
+            -webkit-filter: blur(4px);
+            -moz-filter: blur(4px);
+        }
+
+        .dashboardItem img {
+        }
+
+        .dashboardItem .loadingText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 26px;
+            font-weight: bolder;
+            margin-left: -63px;
+            margin-top: -22px;
+        }
+</style>
+
+<div class="Dashaboard">
+    <div class="dashboardSection">
+        <div class="title">
+            <button class="btn">
+                <i class="bi bi-arrow-repeat" style="font-size: 1rem; color: white;"></i>
+            </button>
+            Partidos recientes:
+        </div>
+        <div id="actualMatchesContent" class="dashboardItem">
+            <div class="default">
+                <img src="~/img/defaults/default1.png" />
+            </div>
+            <div class="loadingText">Cargando...</div>
+        </div>
+    </div>
 </div>
+
+
+<script type="text/javascript" src="~/scripts/Areas/Scores/Scripts/Dashboard/default.js"></script>

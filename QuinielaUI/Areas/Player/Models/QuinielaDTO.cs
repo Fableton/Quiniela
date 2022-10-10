@@ -24,6 +24,8 @@
         public int VisitorGoals { get; set; }
         public int? PlayerResult { get; set; }
 
+        public bool CanDraw { get; set; }
+
         public bool IsHit()
         {
             bool hit = false;
@@ -38,5 +40,6 @@
         }
         public DateTime Date { get; set; }
         public bool Ended { get; set; }
+        public string Group { get; set; }
     }
 }

@@ -1,0 +1,193 @@
+﻿@using QuinielaUI.Areas.Player.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model QuinielaDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .containerQuiniela {
+        border-radius: 20px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #f4bc2f;
+        background-color: #fffaef;
+        padding: 10px;
+        padding-left: 15px;
+        min-width: 300px;
+        max-width: 60%;
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    .match {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        line-height: 30px;
+        font-size: larger;
+        justify-items: center;
+        align-items: center;
+        padding-bottom: 15px;
+    }
+
+    .team img {
+        width: 40px;
+        height: 30px;
+    }
+
+    .content-input input,
+    .content-select select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    .content-input input {
+        visibility: hidden;
+        /*position: absolute;
+                                                                                                                                                                                right: 0;*/
+    }
+
+    .content-input {
+        position: relative;
+        margin-bottom: 30px;
+        /*  padding: 5px 0 5px 60px; /* Damos un padding de 60px para posicionar el elemento <i> en este espacio*/
+        display: grid;
+        margin-top: 11px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+        /* Estas reglas se aplicarán a todos las elementos i después de cualquier input*/
+        .content-input input + i {
+            background: #f0f0f0;
+            border: 2px solid rgba(0,0,0,0.2);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Estas reglas se aplicarán a todos los i despues de un input de tipo radio*/
+        .content-input input[type=radio] + i {
+            height: 30px;
+            width: 30px;
+            border-radius: 100%;
+            /* left: 15px;*/
+        }
+
+            .content-input input[type=radio] + i:before {
+                content: '';
+                display: block;
+                height: 18px;
+                width: 18px;
+                background: red;
+                border-radius: 100%;
+                position: absolute;
+                z-index: 1;
+                top: 4px;
+                left: 4px;
+                background: #2AC176;
+                transition: all 0.25s ease; /* Todas las propiedades | tiempo | tipo movimiento */
+                transform: scale(0) /* Lo reducimos a 0*/;
+                opacity: 0; /* Lo ocultamos*/
+            }
+
+        .content-input input[type=radio]:checked + i:before {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .content-input:hover input[type=radio]:not(:checked) + i {
+            background: #B1E8CD;
+        }
+</style>
+<div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="containerQuiniela col-md-7">
+        <h1>@(Model.TournamentName)</h1>
+        <h2>@(Model.Name)</h2>
+        <div class="divider"></div>
+        @foreach (var group in Model.MatchesResume.GroupBy(m => m.Group))
+        {
+            <div class="groups">
+                <h4>@group.Key</h4>
+                @foreach (MatchesResumeDTO match in group)
+                {
+                    <div class="match @(Model.Ended?"ended":"")">
+                        <div class="team @(match.LocalGoals>match.VisitorGoals?"correct":"")">
+                            <img src="~/img/flags/@(match.LocalId).svg">
+                            @(match.LocalName)
+                        </div>
+                        <div>VS</div>
+                        <div class="team @(match.VisitorGoals>match.LocalGoals?"correct":"")">
+                            <img src="~/img/flags/@(match.VisitorId).svg">
+                            @(match.VisitorName)
+                        </div>
+                        <label class="content-input">
+                            <input class="matchResultRadio" type="radio" name="@($"match{match.Id}")" id="@(match.Id)" value="1" @(match.PlayerResult == 1?"checked":"")>Gana
+                            <i></i>
+                        </label>
+
+                        @if (match.CanDraw)
+                        {
+                            <label class="content-input">
+                                <input class="matchResultRadio" type="radio" name="@($"match{match.Id}")" id="@(match.Id)" value="3" @(match.PlayerResult == 3?"checked":"")>Empata
+                                <i></i>
+                            </label>
+                        }
+                        else
+                        {
+                            <div>
+                                &ensp;
+                            </div>
+                        }
+                        <label class="content-input">
+                            <input class="matchResultRadio" type="radio" name="@($"match{match.Id}")" id="@(match.Id)" value="2" @(match.PlayerResult == 2?"checked":"")>Gana
+                            <i></i>
+                        </label>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="toastSuccess" class="toast align-items-center text-white bg-success border-0" data-bs-autohide="true" data-bs-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Se guardo correctamente tu quiniela.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <div id="toastError" class="toast align-items-center text-white bg-danger border-0" data-bs-autohide="true" data-bs-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Error al guardar la quiniela.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(".matchResultRadio").change(function () {
+        console.log($(this));
+        let matchId = $(this).attr('id');
+        let radioName = $(this).attr('name');
+        let radioValue = $("input[name='" + radioName + "']:checked").val();
+        let body = { "matchId": matchId, "result": radioValue };
+        console.log(body);
+        $.ajax({
+            type: "POST",
+            url: "SaveResult",
+            data: body
+        }).done(function () {
+            let toast = $("#toastSuccess").toast("show");
+        }).fail(function (error) {
+            console.error(error);
+            let toast = $("#toastError").toast("show");
+        });
+    })
+</script>
