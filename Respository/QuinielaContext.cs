@@ -228,7 +228,9 @@ namespace Respository
                     new Activity() { Id = "UpdateMatches", Description = "Update matches" },
                     new Activity() { Id = "ViewAdminUsers", Description = "View List of Users" },
                     new Activity() { Id = "AddAdminUsers", Description = "Add new players" },
-                    new Activity() { Id = "GenerateLinkAdminUsers", Description = "Generate acces token to user" }
+                    new Activity() { Id = "GenerateLinkAdminUsers", Description = "Generate acces token to user" },
+                    new Activity() { Id = "ViewAdminMatch", Description = "View List of Matchs" },
+                    new Activity() { Id = "UpdateAdminMatchResult", Description = "Update Match Result" }
                 );
 
             modelBuilder.Entity<Rol>().HasData(
@@ -250,6 +252,8 @@ namespace Respository
                             new { RolId = "Admin", ActivityId = "ViewAdminUsers" },
                             new { RolId = "Admin", ActivityId = "AddAdminUsers" },
                             new { RolId = "Admin", ActivityId = "GenerateLinkAdminUsers" },
+                            new { RolId = "Admin", ActivityId = "ViewAdminMatch" },
+                            new { RolId = "Admin", ActivityId = "UpdateAdminMatchResult" },
 
                             new { RolId = "Player", ActivityId = "UpdateQuiniela" },
                             new { RolId = "Player", ActivityId = "Index" }

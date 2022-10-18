@@ -9,34 +9,15 @@ using System.Data;
 using System.Numerics;
 using System.Reflection.PortableExecutable;
 using System;
+using Entities.Auths;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Start Data Creation");
 
 DbContextOptionsBuilder dbContextOptions = new DbContextOptionsBuilder();
 dbContextOptions.UseSqlServer("Server=SOPHIAW11\\SOPHIASQLEXPRESS; Database=Quinielas; Integrated Security=True; MultipleActiveResultSets=False;");
 QuinielaContext _quinielaContext = new QuinielaContext(dbContextOptions.Options);
 
 var randomGenerator = new Random();
-//foreach (MatchGame game in _quinielaContext.Games.Where(g => g.CanDraw).ToList())
-//{
-//    //empate 20%
-//    if (randomGenerator.Next(1, 5) % 4 == 0)
-//    {
-//        int goals = randomGenerator.Next(0, 5);
-//        game.LocalGoals = goals;
-//        game.VisitorGoals = goals;
-//        game.Ended = true;
-//        _quinielaContext.SaveChanges();
-//    }
-//    else
-//    {
-//        game.LocalGoals = randomGenerator.Next(0, 6);
-//        game.VisitorGoals = randomGenerator.Next(0, 6);
-//        game.Ended = true;
-//        _quinielaContext.SaveChanges();
-//    }
-//}
-
 List<string> apellidos = new List<string>() {
                     "Gonzalez",
                     "Rodriguez",
@@ -109,13 +90,58 @@ List<string> nombres = new List<string>() {
                     "Ricardo",
                     "Raúl"};
 
-List<Player> Players = _quinielaContext.Players.ToList();
+List<MatchGame> games = _quinielaContext.Games.Where(g => g.CanDraw).ToList();
+// Create Scores
+Console.WriteLine("Start CreateScores");
+foreach (MatchGame game in games)
+{
+    //empate 20%
+    if (randomGenerator.Next(1, 5) % 4 == 0)
+    {
+        int goals = randomGenerator.Next(0, 5);
+        game.LocalGoals = goals;
+        game.VisitorGoals = goals;
+        game.Ended = true;
+        _quinielaContext.SaveChanges();
+    }
+    else
+    {
+        game.LocalGoals = randomGenerator.Next(0, 6);
+        game.VisitorGoals = randomGenerator.Next(0, 6);
+        game.Ended = true;
+        _quinielaContext.SaveChanges();
+    }
+}
 
-foreach (Player p in Players)
+Console.WriteLine("End CreateScores");
+
+Console.WriteLine("Start CreatePlayers");
+for (int i = 0; i < 50; i++)
 {
     string name = nombres[randomGenerator.Next(0, nombres.Count - 1)];
     string surname = apellidos[randomGenerator.Next(0, apellidos.Count - 1)];
     string user = (name.Substring(0, 1) + surname).ToLowerInvariant();
-    p.Name = user;
+    Rol rol = _quinielaContext.Rols.Find("Player");
+    Player player = new Player()
+    {
+        Name = user,
+        Rols = new List<Rol>() { rol }
+    };
+    _quinielaContext.Players.Add(player);
+
     _quinielaContext.SaveChanges();
+
+    foreach (MatchGame match in games)
+    {
+        _quinielaContext.PlayerMatchResult.Add(new PlayerMatchResult()
+        {
+            PlayerId = player.Id,
+            MatchGameId = match.Id,
+            Result = randomGenerator.Next(1, 3)
+        });
+
+        _quinielaContext.SaveChanges();
+    }
 }
+
+Console.WriteLine("End CreatePlayers");

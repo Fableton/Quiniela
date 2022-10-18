@@ -12,8 +12,8 @@ using Respository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(QuinielaContext))]
-    [Migration("20221006204240_quinielas")]
-    partial class quinielas
+    [Migration("20221018232612_InitDataBase")]
+    partial class InitDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,6 +67,16 @@ namespace Repository.Migrations
                         {
                             Id = "GenerateLinkAdminUsers",
                             Description = "Generate acces token to user"
+                        },
+                        new
+                        {
+                            Id = "ViewAdminMatch",
+                            Description = "View List of Matchs"
+                        },
+                        new
+                        {
+                            Id = "UpdateAdminMatchResult",
+                            Description = "Update Match Result"
                         });
                 });
 
@@ -156,7 +166,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "A",
+                            Group = "Grupo A",
                             LocalGoals = 0,
                             LocalId = "QAT",
                             QuinielaId = 1,
@@ -169,7 +179,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 21, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "A",
+                            Group = "Grupo A",
                             LocalGoals = 0,
                             LocalId = "SEN",
                             QuinielaId = 1,
@@ -182,7 +192,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 21, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "B",
+                            Group = "Grupo B",
                             LocalGoals = 0,
                             LocalId = "ENG",
                             QuinielaId = 1,
@@ -195,7 +205,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 21, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "B",
+                            Group = "Grupo B",
                             LocalGoals = 0,
                             LocalId = "USA",
                             QuinielaId = 1,
@@ -208,7 +218,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 22, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "C",
+                            Group = "Grupo C",
                             LocalGoals = 0,
                             LocalId = "ARG",
                             QuinielaId = 1,
@@ -221,7 +231,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 22, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "C",
+                            Group = "Grupo C",
                             LocalGoals = 0,
                             LocalId = "MEX",
                             QuinielaId = 1,
@@ -234,7 +244,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 22, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "D",
+                            Group = "Grupo D",
                             LocalGoals = 0,
                             LocalId = "DEN",
                             QuinielaId = 1,
@@ -247,7 +257,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 22, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "D",
+                            Group = "Grupo D",
                             LocalGoals = 0,
                             LocalId = "FRA",
                             QuinielaId = 1,
@@ -260,7 +270,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 23, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "E",
+                            Group = "Grupo E",
                             LocalGoals = 0,
                             LocalId = "ESP",
                             QuinielaId = 1,
@@ -273,7 +283,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 23, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "E",
+                            Group = "Grupo E",
                             LocalGoals = 0,
                             LocalId = "GER",
                             QuinielaId = 1,
@@ -286,7 +296,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 23, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "F",
+                            Group = "Grupo F",
                             LocalGoals = 0,
                             LocalId = "BEL",
                             QuinielaId = 1,
@@ -299,7 +309,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 23, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "F",
+                            Group = "Grupo F",
                             LocalGoals = 0,
                             LocalId = "MAR",
                             QuinielaId = 1,
@@ -312,7 +322,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 24, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "G",
+                            Group = "Grupo G",
                             LocalGoals = 0,
                             LocalId = "SUI",
                             QuinielaId = 1,
@@ -325,7 +335,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 24, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "G",
+                            Group = "Grupo G",
                             LocalGoals = 0,
                             LocalId = "BRA",
                             QuinielaId = 1,
@@ -338,7 +348,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 24, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "H",
+                            Group = "Grupo H",
                             LocalGoals = 0,
                             LocalId = "POR",
                             QuinielaId = 1,
@@ -351,7 +361,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 24, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "H",
+                            Group = "Grupo H",
                             LocalGoals = 0,
                             LocalId = "URU",
                             QuinielaId = 1,
@@ -364,7 +374,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 25, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "B",
+                            Group = "Grupo B",
                             LocalGoals = 0,
                             LocalId = "WAL",
                             QuinielaId = 2,
@@ -377,7 +387,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 25, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "A",
+                            Group = "Grupo A",
                             LocalGoals = 0,
                             LocalId = "QAT",
                             QuinielaId = 2,
@@ -390,7 +400,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "A",
+                            Group = "Grupo A",
                             LocalGoals = 0,
                             LocalId = "NED",
                             QuinielaId = 2,
@@ -403,7 +413,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 25, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "B",
+                            Group = "Grupo B",
                             LocalGoals = 0,
                             LocalId = "ENG",
                             QuinielaId = 2,
@@ -416,7 +426,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 26, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "D",
+                            Group = "Grupo D",
                             LocalGoals = 0,
                             LocalId = "TUN",
                             QuinielaId = 2,
@@ -429,7 +439,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 26, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "C",
+                            Group = "Grupo C",
                             LocalGoals = 0,
                             LocalId = "POL",
                             QuinielaId = 2,
@@ -442,7 +452,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "D",
+                            Group = "Grupo D",
                             LocalGoals = 0,
                             LocalId = "FRA",
                             QuinielaId = 2,
@@ -455,7 +465,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "C",
+                            Group = "Grupo C",
                             LocalGoals = 0,
                             LocalId = "ARG",
                             QuinielaId = 2,
@@ -468,7 +478,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 27, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "E",
+                            Group = "Grupo E",
                             LocalGoals = 0,
                             LocalId = "JPN",
                             QuinielaId = 2,
@@ -481,7 +491,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 27, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "F",
+                            Group = "Grupo F",
                             LocalGoals = 0,
                             LocalId = "BEL",
                             QuinielaId = 2,
@@ -494,7 +504,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "F",
+                            Group = "Grupo F",
                             LocalGoals = 0,
                             LocalId = "CRO",
                             QuinielaId = 2,
@@ -507,7 +517,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 27, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "E",
+                            Group = "Grupo E",
                             LocalGoals = 0,
                             LocalId = "ESP",
                             QuinielaId = 2,
@@ -520,7 +530,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 28, 4, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "G",
+                            Group = "Grupo G",
                             LocalGoals = 0,
                             LocalId = "CMR",
                             QuinielaId = 2,
@@ -533,7 +543,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 28, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "H",
+                            Group = "Grupo H",
                             LocalGoals = 0,
                             LocalId = "KOR",
                             QuinielaId = 2,
@@ -546,7 +556,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 28, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "G",
+                            Group = "Grupo G",
                             LocalGoals = 0,
                             LocalId = "BRA",
                             QuinielaId = 2,
@@ -559,7 +569,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 28, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "H",
+                            Group = "Grupo H",
                             LocalGoals = 0,
                             LocalId = "POR",
                             QuinielaId = 2,
@@ -572,7 +582,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "A",
+                            Group = "Grupo A",
                             LocalGoals = 0,
                             LocalId = "ECU",
                             QuinielaId = 3,
@@ -585,7 +595,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "A",
+                            Group = "Grupo A",
                             LocalGoals = 0,
                             LocalId = "NED",
                             QuinielaId = 3,
@@ -598,7 +608,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 29, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "B",
+                            Group = "Grupo B",
                             LocalGoals = 0,
                             LocalId = "IRN",
                             QuinielaId = 3,
@@ -611,7 +621,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 29, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "B",
+                            Group = "Grupo B",
                             LocalGoals = 0,
                             LocalId = "WAL",
                             QuinielaId = 3,
@@ -624,7 +634,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "D",
+                            Group = "Grupo D",
                             LocalGoals = 0,
                             LocalId = "TUN",
                             QuinielaId = 3,
@@ -637,7 +647,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "D",
+                            Group = "Grupo D",
                             LocalGoals = 0,
                             LocalId = "AUS",
                             QuinielaId = 3,
@@ -650,7 +660,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 30, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "C",
+                            Group = "Grupo C",
                             LocalGoals = 0,
                             LocalId = "POL",
                             QuinielaId = 3,
@@ -663,7 +673,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 11, 30, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "C",
+                            Group = "Grupo C",
                             LocalGoals = 0,
                             LocalId = "KSA",
                             QuinielaId = 3,
@@ -676,7 +686,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "F",
+                            Group = "Grupo F",
                             LocalGoals = 0,
                             LocalId = "CRO",
                             QuinielaId = 3,
@@ -689,7 +699,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "F",
+                            Group = "Grupo F",
                             LocalGoals = 0,
                             LocalId = "CAN",
                             QuinielaId = 3,
@@ -702,7 +712,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 1, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "E",
+                            Group = "Grupo E",
                             LocalGoals = 0,
                             LocalId = "JPN",
                             QuinielaId = 3,
@@ -715,7 +725,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 1, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "E",
+                            Group = "Grupo E",
                             LocalGoals = 0,
                             LocalId = "CRC",
                             QuinielaId = 3,
@@ -728,7 +738,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "H",
+                            Group = "Grupo H",
                             LocalGoals = 0,
                             LocalId = "KOR",
                             QuinielaId = 3,
@@ -741,7 +751,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "H",
+                            Group = "Grupo H",
                             LocalGoals = 0,
                             LocalId = "GHA",
                             QuinielaId = 3,
@@ -754,7 +764,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 2, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "G",
+                            Group = "Grupo G",
                             LocalGoals = 0,
                             LocalId = "SRB",
                             QuinielaId = 3,
@@ -767,7 +777,7 @@ namespace Repository.Migrations
                             CanDraw = true,
                             Date = new DateTime(2022, 12, 2, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Ended = false,
-                            Group = "G",
+                            Group = "Grupo G",
                             LocalGoals = 0,
                             LocalId = "CMR",
                             QuinielaId = 3,
@@ -1073,7 +1083,7 @@ namespace Repository.Migrations
                         new
                         {
                             Id = 3,
-                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jornada 3",
                             StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
@@ -1081,7 +1091,7 @@ namespace Repository.Migrations
                         new
                         {
                             Id = 4,
-                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Octavos de final",
                             StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
@@ -1089,7 +1099,7 @@ namespace Repository.Migrations
                         new
                         {
                             Id = 5,
-                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cuartos de final",
                             StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
@@ -1097,7 +1107,7 @@ namespace Repository.Migrations
                         new
                         {
                             Id = 6,
-                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Semifinal",
                             StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
@@ -1105,7 +1115,7 @@ namespace Repository.Migrations
                         new
                         {
                             Id = 7,
-                            EndDate = new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Finales",
                             StartDate = new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentId = 1
@@ -1387,8 +1397,23 @@ namespace Repository.Migrations
                         },
                         new
                         {
+                            RolId = "Admin",
+                            ActivityId = "ViewAdminMatch"
+                        },
+                        new
+                        {
+                            RolId = "Admin",
+                            ActivityId = "UpdateAdminMatchResult"
+                        },
+                        new
+                        {
                             RolId = "Player",
                             ActivityId = "UpdateQuiniela"
+                        },
+                        new
+                        {
+                            RolId = "Player",
+                            ActivityId = "Index"
                         });
                 });
 

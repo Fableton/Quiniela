@@ -164,7 +164,8 @@ namespace Repository.Migrations
                     VisitorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     LocalId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Group = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuinielaId = table.Column<int>(type: "int", nullable: false)
+                    QuinielaId = table.Column<int>(type: "int", nullable: false),
+                    Ended = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,9 +216,14 @@ namespace Repository.Migrations
                 columns: new[] { "Id", "Description" },
                 values: new object[,]
                 {
+                    { "AddAdminUsers", "Add new players" },
+                    { "GenerateLinkAdminUsers", "Generate acces token to user" },
                     { "Index", "Watch Index" },
+                    { "UpdateAdminMatchResult", "Update Match Result" },
                     { "UpdateMatches", "Update matches" },
-                    { "UpdateQuiniela", "Update Quiniela matches" }
+                    { "UpdateQuiniela", "Update Quiniela matches" },
+                    { "ViewAdminMatch", "View List of Matchs" },
+                    { "ViewAdminUsers", "View List of Users" }
                 });
 
             migrationBuilder.InsertData(
@@ -261,6 +267,7 @@ namespace Repository.Migrations
                     { "KSA", "Arabia Saudita" },
                     { "MAR", "Marruecos" },
                     { "MEX", "Mexico" },
+                    { "N/A", "Por definir" },
                     { "NED", "Paises Bajos" },
                     { "POL", "Polonia" },
                     { "POR", "Portugal" },
@@ -269,10 +276,18 @@ namespace Repository.Migrations
                     { "SRB", "Serbia" },
                     { "SUI", "Suiza" },
                     { "TUN", "Tunez" },
-                    { "URU", "Uruguay" },
-                    { "USA", "Estados Unidos" },
-                    { "WAL", "Gales" }
+                    { "URU", "Uruguay" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Teams",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { "USA", "Estados Unidos" });
+
+            migrationBuilder.InsertData(
+                table: "Teams",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { "WAL", "Gales" });
 
             migrationBuilder.InsertData(
                 table: "Tournaments",
@@ -290,9 +305,13 @@ namespace Repository.Migrations
                 columns: new[] { "Id", "EndDate", "Name", "StartDate", "TournamentId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jornada 1", new DateTime(2022, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, new DateTime(2022, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jornada 2", new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, new DateTime(2022, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jornada 3", new DateTime(2022, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
+                    { 1, new DateTime(2022, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jornada 1", new DateTime(2022, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, new DateTime(2022, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jornada 2", new DateTime(2022, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jornada 3", new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, new DateTime(2022, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Octavos de final", new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 5, new DateTime(2022, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cuartos de final", new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, new DateTime(2022, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Semifinal", new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 7, new DateTime(2022, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Finales", new DateTime(2022, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -301,33 +320,94 @@ namespace Repository.Migrations
                 columns: new[] { "ActivityId", "RolId" },
                 values: new object[,]
                 {
+                    { "AddAdminUsers", "Admin" },
+                    { "GenerateLinkAdminUsers", "Admin" },
                     { "Index", "Admin" },
+                    { "UpdateAdminMatchResult", "Admin" },
                     { "UpdateMatches", "Admin" },
                     { "UpdateQuiniela", "Admin" },
+                    { "ViewAdminMatch", "Admin" },
+                    { "ViewAdminUsers", "Admin" },
+                    { "Index", "Player" },
                     { "UpdateQuiniela", "Player" }
                 });
 
             migrationBuilder.InsertData(
                 table: "MatchGames",
-                columns: new[] { "Id", "CanDraw", "Date", "Group", "LocalGoals", "LocalId", "QuinielaId", "VisitorGoals", "VisitorId" },
+                columns: new[] { "Id", "CanDraw", "Date", "Ended", "Group", "LocalGoals", "LocalId", "QuinielaId", "VisitorGoals", "VisitorId" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2022, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", 0, "QAT", 1, 0, "ECU" },
-                    { 2, true, new DateTime(2022, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", 0, "SEN", 1, 0, "NED" },
-                    { 3, true, new DateTime(2022, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "B", 0, "ENG", 1, 0, "IRN" },
-                    { 4, true, new DateTime(2022, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "B", 0, "USA", 1, 0, "WAL" },
-                    { 5, true, new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "C", 0, "ARG", 1, 0, "KSA" },
-                    { 6, true, new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "C", 0, "MEX", 1, 0, "POL" },
-                    { 7, true, new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "D", 0, "DEN", 1, 0, "TUN" },
-                    { 8, true, new DateTime(2022, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "D", 0, "FRA", 1, 0, "AUS" },
-                    { 9, true, new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "E", 0, "ESP", 1, 0, "CRC" },
-                    { 10, true, new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "E", 0, "GER", 1, 0, "JPN" },
-                    { 11, true, new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "F", 0, "BEL", 1, 0, "CAN" },
-                    { 12, true, new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "F", 0, "MAR", 1, 0, "CRO" },
-                    { 13, true, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "G", 0, "SUI", 1, 0, "CMR" },
-                    { 14, true, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "G", 0, "BRA", 1, 0, "SRB" },
-                    { 15, true, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "H", 0, "POR", 1, 0, "GHA" },
-                    { 16, true, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "H", 0, "URU", 1, 0, "KOR" }
+                    { 1, true, new DateTime(2022, 11, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo A", 0, "QAT", 1, 0, "ECU" },
+                    { 2, true, new DateTime(2022, 11, 21, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo A", 0, "SEN", 1, 0, "NED" },
+                    { 3, true, new DateTime(2022, 11, 21, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo B", 0, "ENG", 1, 0, "IRN" },
+                    { 4, true, new DateTime(2022, 11, 21, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo B", 0, "USA", 1, 0, "WAL" },
+                    { 5, true, new DateTime(2022, 11, 22, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo C", 0, "ARG", 1, 0, "KSA" },
+                    { 6, true, new DateTime(2022, 11, 22, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo C", 0, "MEX", 1, 0, "POL" },
+                    { 7, true, new DateTime(2022, 11, 22, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo D", 0, "DEN", 1, 0, "TUN" },
+                    { 8, true, new DateTime(2022, 11, 22, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo D", 0, "FRA", 1, 0, "AUS" },
+                    { 9, true, new DateTime(2022, 11, 23, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo E", 0, "ESP", 1, 0, "CRC" },
+                    { 10, true, new DateTime(2022, 11, 23, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo E", 0, "GER", 1, 0, "JPN" },
+                    { 11, true, new DateTime(2022, 11, 23, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo F", 0, "BEL", 1, 0, "CAN" },
+                    { 12, true, new DateTime(2022, 11, 23, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo F", 0, "MAR", 1, 0, "CRO" },
+                    { 13, true, new DateTime(2022, 11, 24, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo G", 0, "SUI", 1, 0, "CMR" },
+                    { 14, true, new DateTime(2022, 11, 24, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo G", 0, "BRA", 1, 0, "SRB" },
+                    { 15, true, new DateTime(2022, 11, 24, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo H", 0, "POR", 1, 0, "GHA" },
+                    { 16, true, new DateTime(2022, 11, 24, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo H", 0, "URU", 1, 0, "KOR" },
+                    { 17, true, new DateTime(2022, 11, 25, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo B", 0, "WAL", 2, 0, "IRN" },
+                    { 18, true, new DateTime(2022, 11, 25, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo A", 0, "QAT", 2, 0, "SEN" },
+                    { 19, true, new DateTime(2022, 11, 25, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo A", 0, "NED", 2, 0, "ECU" },
+                    { 20, true, new DateTime(2022, 11, 25, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo B", 0, "ENG", 2, 0, "USA" },
+                    { 21, true, new DateTime(2022, 11, 26, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo D", 0, "TUN", 2, 0, "AUS" },
+                    { 22, true, new DateTime(2022, 11, 26, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo C", 0, "POL", 2, 0, "KSA" },
+                    { 23, true, new DateTime(2022, 11, 26, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo D", 0, "FRA", 2, 0, "DEN" },
+                    { 24, true, new DateTime(2022, 11, 26, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo C", 0, "ARG", 2, 0, "MEX" },
+                    { 25, true, new DateTime(2022, 11, 27, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo E", 0, "JPN", 2, 0, "CRC" },
+                    { 26, true, new DateTime(2022, 11, 27, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo F", 0, "BEL", 2, 0, "MAR" },
+                    { 27, true, new DateTime(2022, 11, 27, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo F", 0, "CRO", 2, 0, "CAN" },
+                    { 28, true, new DateTime(2022, 11, 27, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo E", 0, "ESP", 2, 0, "GER" },
+                    { 29, true, new DateTime(2022, 11, 28, 4, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo G", 0, "CMR", 2, 0, "SRB" },
+                    { 30, true, new DateTime(2022, 11, 28, 7, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo H", 0, "KOR", 2, 0, "GHA" },
+                    { 31, true, new DateTime(2022, 11, 28, 10, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo G", 0, "BRA", 2, 0, "SUI" },
+                    { 32, true, new DateTime(2022, 11, 28, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo H", 0, "POR", 2, 0, "URU" },
+                    { 33, true, new DateTime(2022, 11, 29, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo A", 0, "ECU", 3, 0, "SEN" },
+                    { 34, true, new DateTime(2022, 11, 29, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo A", 0, "NED", 3, 0, "QAT" },
+                    { 35, true, new DateTime(2022, 11, 29, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo B", 0, "IRN", 3, 0, "USA" },
+                    { 36, true, new DateTime(2022, 11, 29, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo B", 0, "WAL", 3, 0, "ENG" },
+                    { 37, true, new DateTime(2022, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo D", 0, "TUN", 3, 0, "FRA" },
+                    { 38, true, new DateTime(2022, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo D", 0, "AUS", 3, 0, "DEN" },
+                    { 39, true, new DateTime(2022, 11, 30, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo C", 0, "POL", 3, 0, "ARG" },
+                    { 40, true, new DateTime(2022, 11, 30, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo C", 0, "KSA", 3, 0, "MEX" },
+                    { 41, true, new DateTime(2022, 12, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo F", 0, "CRO", 3, 0, "BEL" },
+                    { 42, true, new DateTime(2022, 12, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo F", 0, "CAN", 3, 0, "MAR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MatchGames",
+                columns: new[] { "Id", "CanDraw", "Date", "Ended", "Group", "LocalGoals", "LocalId", "QuinielaId", "VisitorGoals", "VisitorId" },
+                values: new object[,]
+                {
+                    { 43, true, new DateTime(2022, 12, 1, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo E", 0, "JPN", 3, 0, "ESP" },
+                    { 44, true, new DateTime(2022, 12, 1, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo E", 0, "CRC", 3, 0, "GER" },
+                    { 45, true, new DateTime(2022, 12, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo H", 0, "KOR", 3, 0, "POR" },
+                    { 46, true, new DateTime(2022, 12, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo H", 0, "GHA", 3, 0, "URU" },
+                    { 47, true, new DateTime(2022, 12, 2, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo G", 0, "SRB", 3, 0, "SUI" },
+                    { 48, true, new DateTime(2022, 12, 2, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "Grupo G", 0, "CMR", 3, 0, "BRA" },
+                    { 49, false, new DateTime(2022, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 50, false, new DateTime(2022, 12, 3, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 51, false, new DateTime(2022, 12, 4, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 52, false, new DateTime(2022, 12, 4, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 53, false, new DateTime(2022, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 54, false, new DateTime(2022, 12, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 55, false, new DateTime(2022, 12, 6, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 56, false, new DateTime(2022, 12, 6, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 4, 0, "N/A" },
+                    { 57, false, new DateTime(2022, 12, 9, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 5, 0, "N/A" },
+                    { 58, false, new DateTime(2022, 12, 9, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 5, 0, "N/A" },
+                    { 59, false, new DateTime(2022, 12, 10, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 5, 0, "N/A" },
+                    { 60, false, new DateTime(2022, 12, 10, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 5, 0, "N/A" },
+                    { 61, false, new DateTime(2022, 12, 13, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 6, 0, "N/A" },
+                    { 62, false, new DateTime(2022, 12, 14, 13, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 6, 0, "N/A" },
+                    { 63, false, new DateTime(2022, 12, 17, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 7, 0, "N/A" },
+                    { 64, false, new DateTime(2022, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), false, "", 0, "N/A", 7, 0, "N/A" }
                 });
 
             migrationBuilder.CreateIndex(
