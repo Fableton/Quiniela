@@ -4,20 +4,49 @@
 }
 <style type="text/css">
 
+    @@media (min-width: 0px) {
 
-    .dashboardSection .title {
-        background-color: #F8A11E;
-        display: table;
-        border-style: solid;
-        border-radius: 9px;
-        border-color: #F8A11E;
-        border-end-end-radius: 0px;
-        border-end-start-radius: 0px;
-        padding-right: 10px;
-        font-size: larger;
-        color: white;
-        font-weight: bold;
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+        }
     }
+
+    @@media (min-width: 768px) {
+
+        .dashboard {
+            display: grid;
+            grid-template-areas:
+                "actualMatches actualMatches bestStats";
+        }
+    }
+
+    .dashboardSection {
+        padding: 1rem;
+    }
+
+        .dashboardSection .title {
+            background-color: #F8A11E;
+            display: table;
+            border-style: solid;
+            border-radius: 9px;
+            border-color: #F8A11E;
+            border-end-end-radius: 0px;
+            border-end-start-radius: 0px;
+            padding-right: 10px;
+            font-size: larger;
+            color: white;
+            font-weight: bold;
+            padding-left: 5px;
+        }
+
+        .dashboardSection#actualMatches {
+            grid-area: actualMatches;
+        }
+
+        .dashboardSection#bestStats {
+            grid-area: bestStats;
+        }
 
     .dashboardItem {
         position: relative;
@@ -53,10 +82,10 @@
         }
 </style>
 
-<div class="Dashaboard">
-    <div class="dashboardSection">
+<div class="dashboard">
+    <div class="dashboardSection" id="actualMatches">
         <div class="title">
-            <button class="btn">
+            <button class="btn btn-warning btn-sm">
                 <i class="bi bi-arrow-repeat" style="font-size: 1rem; color: white;"></i>
             </button>
             Partidos recientes:
@@ -64,6 +93,30 @@
         <div id="actualMatchesContent" class="dashboardItem">
             <div class="default">
                 <img src="~/img/defaults/default1.png" />
+            </div>
+            <div class="loadingText">Cargando...</div>
+        </div>
+    </div>
+    <div class="dashboardSection" id="bestStats">
+        <div class="title">
+            <button class="btn btn-warning btn-sm">
+                <i class="bi bi-arrow-repeat" style="font-size: 1rem; color: white;"></i>
+            </button>
+            Mejor puntuacion:
+        </div>
+        <div id="bestStatsContent" class="dashboardItem">
+            <div class="default">
+                @*<img src="~/img/defaults/default1.png" />*@
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
+                <p>Usuario 1</p>
             </div>
             <div class="loadingText">Cargando...</div>
         </div>

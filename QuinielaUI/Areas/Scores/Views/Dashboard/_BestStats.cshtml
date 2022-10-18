@@ -1,0 +1,56 @@
+﻿@using QuinielaUI.Areas.Scores.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<PlayerStats>
+@{
+}
+
+<style>
+
+</style>
+@if (Model.Count != 0)
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Quinielas</th>
+                <th scope="col">Partidos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 1;
+            }
+            @foreach (PlayerStats playerStat in Model)
+            {
+                <tr>
+                    <th>
+                        @index
+                    </th>
+                    <th scope="row">
+                        @if (index == 1)
+                        {
+                            <img src="~/img/emoji/crown.png" alt="Bootstrap" width="20" height="20">
+                        }
+                        @playerStat.PlayerName
+
+                    </th>
+                    <td>@playerStat.QuinielasWin</td>
+                    <td>@playerStat.MatchsWins</td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+
+
+}
+else
+{
+    <div>
+        <i class="bi bi-bell-slash-fill" style="font-size: 1rem; color: #F0483E;"></i>
+        No hay información
+    </div>
+}

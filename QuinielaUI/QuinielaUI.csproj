@@ -24,6 +24,9 @@
     <Content Update="wwwroot\img\defaults\Default1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\img\emoji\crown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\img\flags\ARG.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

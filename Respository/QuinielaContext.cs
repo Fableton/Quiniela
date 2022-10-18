@@ -251,7 +251,8 @@ namespace Respository
                             new { RolId = "Admin", ActivityId = "AddAdminUsers" },
                             new { RolId = "Admin", ActivityId = "GenerateLinkAdminUsers" },
 
-                            new { RolId = "Player", ActivityId = "UpdateQuiniela" }
+                            new { RolId = "Player", ActivityId = "UpdateQuiniela" },
+                            new { RolId = "Player", ActivityId = "Index" }
                             );
                     });
 
