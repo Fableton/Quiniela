@@ -90,25 +90,25 @@ List<string> nombres = new List<string>() {
                     "Ricardo",
                     "Raúl"};
 
-List<MatchGame> games = _quinielaContext.Games.Where(g => g.CanDraw).ToList();
+List<Match> matchs = _quinielaContext.Matchs.Where(g => g.CanDraw).ToList();
 // Create Scores
 Console.WriteLine("Start CreateScores");
-foreach (MatchGame game in games)
+foreach (Match match in matchs)
 {
     //empate 20%
     if (randomGenerator.Next(1, 5) % 4 == 0)
     {
         int goals = randomGenerator.Next(0, 5);
-        game.LocalGoals = goals;
-        game.VisitorGoals = goals;
-        game.Ended = true;
+        match.LocalGoals = goals;
+        match.VisitorGoals = goals;
+        match.Ended = true;
         _quinielaContext.SaveChanges();
     }
     else
     {
-        game.LocalGoals = randomGenerator.Next(0, 6);
-        game.VisitorGoals = randomGenerator.Next(0, 6);
-        game.Ended = true;
+        match.LocalGoals = randomGenerator.Next(0, 6);
+        match.VisitorGoals = randomGenerator.Next(0, 6);
+        match.Ended = true;
         _quinielaContext.SaveChanges();
     }
 }
@@ -131,12 +131,12 @@ for (int i = 0; i < 50; i++)
 
     _quinielaContext.SaveChanges();
 
-    foreach (MatchGame match in games)
+    foreach (Match match in matchs)
     {
-        _quinielaContext.PlayerMatchResult.Add(new PlayerMatchResult()
+        _quinielaContext.PlayerGameResult.Add(new PlayerGameResult()
         {
             PlayerId = player.Id,
-            MatchGameId = match.Id,
+            MatchId = match.Id,
             Result = randomGenerator.Next(1, 3)
         });
 

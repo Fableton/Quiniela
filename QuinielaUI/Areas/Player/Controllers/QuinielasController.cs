@@ -36,9 +36,9 @@ namespace QuinielaUI.Areas.Player.Controllers
                 TournamentName = q.Tournament.Name,
                 EndDate = q.EndDate,
                 Ended = DateTime.Now > q.EndDate,
-                NumberOfMatches = q.Matches.Count(),
+                NumberOfMatches = q.Matchs.Count(),
                 Name = q.Name,
-                MatchesResume = q.Matches.Select(m =>
+                MatchesResume = q.Matchs.Select(m =>
                     new MatchesResumeDTO()
                     {
                         Id = m.Id,
@@ -58,7 +58,7 @@ namespace QuinielaUI.Areas.Player.Controllers
                 q.Hits = 0;
                 q.MatchesResume.ForEach(mr =>
                 {
-                    PlayerMatchResult playerMatchResult = _quinielaContext.PlayerMatchResult.Find(playerId, mr.Id);
+                    PlayerGameResult playerMatchResult = _quinielaContext.PlayerGameResult.FirstOrDefault(pgr => pgr.PlayerId == playerId && pgr.MatchId == mr.Id);
                     if (playerMatchResult != null)
                     {
                         mr.PlayerResult = playerMatchResult.Result;
@@ -95,9 +95,9 @@ namespace QuinielaUI.Areas.Player.Controllers
                     MatchesResume = new List<MatchesResumeDTO>()
                 };
 
-                foreach (Entities.MatchGame match in quiniela.Matches)
+                foreach (Entities.Match match in quiniela.Matchs)
                 {
-                    PlayerMatchResult playerMatchResult = _quinielaContext.PlayerMatchResult.Find(playerId, match.Id);
+                    PlayerGameResult playerMatchResult = _quinielaContext.PlayerGameResult.FirstOrDefault(pmr => pmr.PlayerId == playerId && pmr.MatchId == match.Id);
 
                     model.MatchesResume.Add(new MatchesResumeDTO()
                     {
@@ -126,20 +126,21 @@ namespace QuinielaUI.Areas.Player.Controllers
         {
             int playerId = int.Parse(HttpContext.Response.Headers["playerId"].ToString());
 
-            Entities.MatchGame matchGame = _quinielaContext.Games.Find(matchId);
+            Entities.Match matchGame = _quinielaContext.Matchs.Find(matchId);
 
             if (matchGame != null)
             {
                 if (matchGame.Quiniela.EndDate > DateTime.Now)
                 {
-                    PlayerMatchResult playerMatchResult = _quinielaContext.PlayerMatchResult.Find(playerId, matchId);
+                    PlayerGameResult playerMatchResult = _quinielaContext.PlayerGameResult.FirstOrDefault(pgr => pgr.MatchId == matchId && playerId == playerId);
 
                     if (playerMatchResult == null)
                     {
-                        _quinielaContext.PlayerMatchResult.Add(new PlayerMatchResult()
+                        _quinielaContext.PlayerGameResult.Add(new PlayerGameResult()
                         {
                             PlayerId = playerId,
-                            MatchGameId = matchId,
+                            MatchId = matchId,
+                            QuestionId = null,
                             Result = result
                         });
                     }

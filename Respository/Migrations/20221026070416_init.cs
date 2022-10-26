@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class InitDataBase : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -152,38 +152,61 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MatchGames",
+                name: "Matchs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    QuinielaId = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Group = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ended = table.Column<bool>(type: "bit", nullable: false),
                     LocalGoals = table.Column<int>(type: "int", nullable: false),
                     VisitorGoals = table.Column<int>(type: "int", nullable: false),
                     CanDraw = table.Column<bool>(type: "bit", nullable: false),
                     VisitorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LocalId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Group = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuinielaId = table.Column<int>(type: "int", nullable: false),
-                    Ended = table.Column<bool>(type: "bit", nullable: false)
+                    LocalId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MatchGames", x => x.Id);
+                    table.PrimaryKey("PK_Matchs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MatchGames_Quinielas_QuinielaId",
+                        name: "FK_Matchs_Quinielas_QuinielaId",
                         column: x => x.QuinielaId,
                         principalTable: "Quinielas",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_MatchGames_Teams_LocalId",
+                        name: "FK_Matchs_Teams_LocalId",
                         column: x => x.LocalId,
                         principalTable: "Teams",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_MatchGames_Teams_VisitorId",
+                        name: "FK_Matchs_Teams_VisitorId",
                         column: x => x.VisitorId,
                         principalTable: "Teams",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuinielaId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Group = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ended = table.Column<bool>(type: "bit", nullable: false),
+                    Answer = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_Quinielas_QuinielaId",
+                        column: x => x.QuinielaId,
+                        principalTable: "Quinielas",
                         principalColumn: "Id");
                 });
 
@@ -191,22 +214,30 @@ namespace Repository.Migrations
                 name: "PlayerMatchResult",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PlayerId = table.Column<int>(type: "int", nullable: false),
-                    MatchGameId = table.Column<int>(type: "int", nullable: false),
+                    MatchId = table.Column<int>(type: "int", nullable: true),
+                    QuestionId = table.Column<int>(type: "int", nullable: true),
                     Result = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlayerMatchResult", x => new { x.PlayerId, x.MatchGameId });
+                    table.PrimaryKey("PK_PlayerMatchResult", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlayerMatchResult_MatchGames_MatchGameId",
-                        column: x => x.MatchGameId,
-                        principalTable: "MatchGames",
+                        name: "FK_PlayerMatchResult_Matchs_MatchId",
+                        column: x => x.MatchId,
+                        principalTable: "Matchs",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PlayerMatchResult_Players_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Players",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PlayerMatchResult_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
                         principalColumn: "Id");
                 });
 
@@ -333,7 +364,7 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MatchGames",
+                table: "Matchs",
                 columns: new[] { "Id", "CanDraw", "Date", "Ended", "Group", "LocalGoals", "LocalId", "QuinielaId", "VisitorGoals", "VisitorId" },
                 values: new object[,]
                 {
@@ -382,7 +413,7 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MatchGames",
+                table: "Matchs",
                 columns: new[] { "Id", "CanDraw", "Date", "Ended", "Group", "LocalGoals", "LocalId", "QuinielaId", "VisitorGoals", "VisitorId" },
                 values: new object[,]
                 {
@@ -411,30 +442,45 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MatchGames_LocalId",
-                table: "MatchGames",
+                name: "IX_Matchs_LocalId",
+                table: "Matchs",
                 column: "LocalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MatchGames_QuinielaId",
-                table: "MatchGames",
+                name: "IX_Matchs_QuinielaId",
+                table: "Matchs",
                 column: "QuinielaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MatchGames_VisitorId",
-                table: "MatchGames",
+                name: "IX_Matchs_VisitorId",
+                table: "Matchs",
                 column: "VisitorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlayerMatchResult_MatchGameId",
+                name: "IX_PlayerMatchResult_MatchId",
                 table: "PlayerMatchResult",
-                column: "MatchGameId");
+                column: "MatchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlayerMatchResult_PlayerId",
+                table: "PlayerMatchResult",
+                column: "PlayerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlayerMatchResult_QuestionId",
+                table: "PlayerMatchResult",
+                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayersRols_PlayerId",
                 schema: "Security",
                 table: "PlayersRols",
                 column: "PlayerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_QuinielaId",
+                table: "Questions",
+                column: "QuinielaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Quinielas_TournamentId",
@@ -462,7 +508,10 @@ namespace Repository.Migrations
                 schema: "Security");
 
             migrationBuilder.DropTable(
-                name: "MatchGames");
+                name: "Matchs");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Players");
@@ -476,10 +525,10 @@ namespace Repository.Migrations
                 schema: "Security");
 
             migrationBuilder.DropTable(
-                name: "Quinielas");
+                name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Quinielas");
 
             migrationBuilder.DropTable(
                 name: "Tournaments");

@@ -13,7 +13,7 @@ namespace Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual IEnumerable<PlayerMatchResult> MatchResults { get; set; }
+        public virtual IEnumerable<PlayerGameResult> MatchResults { get; set; }
 
         [Required]
         public virtual IEnumerable<Rol> Rols { get; set; }

@@ -12,11 +12,12 @@ namespace Respository
         }
 
         public DbSet<Team> Countries { get; set; }
-        public DbSet<MatchGame> Games { get; set; }
+        public DbSet<Match> Matchs { get; set; }
+        public DbSet<Question> Questions { get; set; }
         public DbSet<Quiniela> Quinielas { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Player> Players { get; set; }
-        public DbSet<PlayerMatchResult> PlayerMatchResult { get; set; }
+        public DbSet<PlayerGameResult> PlayerGameResult { get; set; }
         public DbSet<Rol> Rols { get; set; }
         public DbSet<Activity> Activitys { get; set; }
 
@@ -34,23 +35,33 @@ namespace Respository
 
             modelBuilder.Entity<Team>().ToTable("Teams");
 
-            modelBuilder.Entity<MatchGame>().ToTable("MatchGames")
+            modelBuilder.Entity<Match>().ToTable("Matchs")
                 .HasOne(mg => mg.Quiniela)
-                .WithMany(q => q.Matches)
+                .WithMany(q => q.Matchs)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<MatchGame>()
+            modelBuilder.Entity<Match>()
                 .HasOne(mg => mg.Local)
-                .WithMany(c => c.LocalGames)
+                .WithMany(c => c.LocalMatchs)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<MatchGame>()
+            modelBuilder.Entity<Match>()
                 .HasOne(mg => mg.Visitor)
-                .WithMany(c => c.VisitorsGames)
+                .WithMany(c => c.VisitorMatchs)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Question>().ToTable("Questions")
+                .HasOne(mg => mg.Quiniela)
+                .WithMany(q => q.Questions)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Quiniela>().ToTable("Quinielas")
-                .HasMany(q => q.Matches)
+                .HasMany(q => q.Matchs)
+                .WithOne(m => m.Quiniela)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Quiniela>()
+                .HasMany(q => q.Questions)
                 .WithOne(m => m.Quiniela)
                 .OnDelete(DeleteBehavior.NoAction);
 
@@ -63,11 +74,18 @@ namespace Respository
                 .HasMany(p => p.Rols)
                 .WithMany(r => r.Players);
 
-            modelBuilder.Entity<PlayerMatchResult>().ToTable("PlayerMatchResult")
-                .HasKey(mr => new { mr.PlayerId, mr.MatchGameId });
-            modelBuilder.Entity<PlayerMatchResult>()
-                .HasOne(mr => mr.MatchGame)
+            modelBuilder.Entity<PlayerGameResult>().ToTable("PlayerMatchResult");
+
+            modelBuilder.Entity<PlayerGameResult>()
+                .HasOne(mr => mr.Match)
                 .WithMany(mg => mg.MatchResults)
+                .HasForeignKey(mr => mr.MatchId)
+                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PlayerGameResult>()
+                .HasOne(mr => mr.Question)
+                .WithMany(mg => mg.QuestionResults)
+                .HasForeignKey(mr => mr.QuestionId)
                  .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Activity>().ToTable("Activities", "Security")
@@ -78,15 +96,6 @@ namespace Respository
             var relationshipRolActivities = modelBuilder.Entity<Rol>()
                 .HasMany<Activity>(r => r.Activities)
                 .WithMany(a => a.Rols);
-            //.UsingEntity(ar => ar.ToTable("RolActivities")
-            //.HasData(
-            //    new[] {
-            //            new { ActivityId = "Index", RolId = "SinglePlayer"  },
-            //            new { ActivityId = "UpdateQuiniela", RolId = "SinglePlayer"  },
-            //        }
-            //    )
-            //);
-
 
             /* Data initializor*/
 
@@ -131,93 +140,93 @@ namespace Respository
                 );
 
             modelBuilder.Entity<Quiniela>().HasData(
-                 new Quiniela() { Id = 1, StartDate = new DateTime(2022, 10, 05), EndDate = new DateTime(2022, 11, 19), TournamentId = 1, Name = "Jornada 1" },
-                 new Quiniela() { Id = 2, StartDate = new DateTime(2022, 11, 25), EndDate = new DateTime(2022, 11, 25), TournamentId = 1, Name = "Jornada 2" },
-                 new Quiniela() { Id = 3, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 11, 29), TournamentId = 1, Name = "Jornada 3" },
-                 new Quiniela() { Id = 4, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 3), TournamentId = 1, Name = "Octavos de final" },
-                 new Quiniela() { Id = 5, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 9), TournamentId = 1, Name = "Cuartos de final" },
-                 new Quiniela() { Id = 6, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 13), TournamentId = 1, Name = "Semifinal" },
-                 new Quiniela() { Id = 7, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 17), TournamentId = 1, Name = "Finales" }
-                );
+                new Quiniela() { Id = 1, StartDate = new DateTime(2022, 10, 05), EndDate = new DateTime(2022, 11, 19), TournamentId = 1, Name = "Jornada 1" },
+                new Quiniela() { Id = 2, StartDate = new DateTime(2022, 11, 25), EndDate = new DateTime(2022, 11, 25), TournamentId = 1, Name = "Jornada 2" },
+                new Quiniela() { Id = 3, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 11, 29), TournamentId = 1, Name = "Jornada 3" },
+                new Quiniela() { Id = 4, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 3), TournamentId = 1, Name = "Octavos de final" },
+                new Quiniela() { Id = 5, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 9), TournamentId = 1, Name = "Cuartos de final" },
+                new Quiniela() { Id = 6, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 13), TournamentId = 1, Name = "Semifinal" },
+                new Quiniela() { Id = 7, StartDate = new DateTime(2022, 11, 29), EndDate = new DateTime(2022, 12, 17), TournamentId = 1, Name = "Finales" }
+             );
 
-            modelBuilder.Entity<MatchGame>().HasData(
+            modelBuilder.Entity<Match>().HasData(
                 //Jornada 1
-                new MatchGame() { Id = 1, Group = "Grupo A", LocalId = "QAT", VisitorId = "ECU", CanDraw = true, Date = new DateTime(2022, 11, 20, 10, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 2, Group = "Grupo A", LocalId = "SEN", VisitorId = "NED", CanDraw = true, Date = new DateTime(2022, 11, 21, 10, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 3, Group = "Grupo B", LocalId = "ENG", VisitorId = "IRN", CanDraw = true, Date = new DateTime(2022, 11, 21, 7, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 4, Group = "Grupo B", LocalId = "USA", VisitorId = "WAL", CanDraw = true, Date = new DateTime(2022, 11, 21, 13, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 5, Group = "Grupo C", LocalId = "ARG", VisitorId = "KSA", CanDraw = true, Date = new DateTime(2022, 11, 22, 4, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 6, Group = "Grupo C", LocalId = "MEX", VisitorId = "POL", CanDraw = true, Date = new DateTime(2022, 11, 22, 10, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 7, Group = "Grupo D", LocalId = "DEN", VisitorId = "TUN", CanDraw = true, Date = new DateTime(2022, 11, 22, 7, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 8, Group = "Grupo D", LocalId = "FRA", VisitorId = "AUS", CanDraw = true, Date = new DateTime(2022, 11, 22, 13, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 9, Group = "Grupo E", LocalId = "ESP", VisitorId = "CRC", CanDraw = true, Date = new DateTime(2022, 11, 23, 10, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 10, Group = "Grupo E", LocalId = "GER", VisitorId = "JPN", CanDraw = true, Date = new DateTime(2022, 11, 23, 07, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 11, Group = "Grupo F", LocalId = "BEL", VisitorId = "CAN", CanDraw = true, Date = new DateTime(2022, 11, 23, 13, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 12, Group = "Grupo F", LocalId = "MAR", VisitorId = "CRO", CanDraw = true, Date = new DateTime(2022, 11, 23, 04, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 13, Group = "Grupo G", LocalId = "SUI", VisitorId = "CMR", CanDraw = true, Date = new DateTime(2022, 11, 24, 04, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 14, Group = "Grupo G", LocalId = "BRA", VisitorId = "SRB", CanDraw = true, Date = new DateTime(2022, 11, 24, 13, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 15, Group = "Grupo H", LocalId = "POR", VisitorId = "GHA", CanDraw = true, Date = new DateTime(2022, 11, 24, 10, 0, 0), QuinielaId = 1 },
-                new MatchGame() { Id = 16, Group = "Grupo H", LocalId = "URU", VisitorId = "KOR", CanDraw = true, Date = new DateTime(2022, 11, 24, 07, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 1, Group = "Grupo A", LocalId = "QAT", VisitorId = "ECU", CanDraw = true, Date = new DateTime(2022, 11, 20, 10, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 2, Group = "Grupo A", LocalId = "SEN", VisitorId = "NED", CanDraw = true, Date = new DateTime(2022, 11, 21, 10, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 3, Group = "Grupo B", LocalId = "ENG", VisitorId = "IRN", CanDraw = true, Date = new DateTime(2022, 11, 21, 7, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 4, Group = "Grupo B", LocalId = "USA", VisitorId = "WAL", CanDraw = true, Date = new DateTime(2022, 11, 21, 13, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 5, Group = "Grupo C", LocalId = "ARG", VisitorId = "KSA", CanDraw = true, Date = new DateTime(2022, 11, 22, 4, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 6, Group = "Grupo C", LocalId = "MEX", VisitorId = "POL", CanDraw = true, Date = new DateTime(2022, 11, 22, 10, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 7, Group = "Grupo D", LocalId = "DEN", VisitorId = "TUN", CanDraw = true, Date = new DateTime(2022, 11, 22, 7, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 8, Group = "Grupo D", LocalId = "FRA", VisitorId = "AUS", CanDraw = true, Date = new DateTime(2022, 11, 22, 13, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 9, Group = "Grupo E", LocalId = "ESP", VisitorId = "CRC", CanDraw = true, Date = new DateTime(2022, 11, 23, 10, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 10, Group = "Grupo E", LocalId = "GER", VisitorId = "JPN", CanDraw = true, Date = new DateTime(2022, 11, 23, 07, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 11, Group = "Grupo F", LocalId = "BEL", VisitorId = "CAN", CanDraw = true, Date = new DateTime(2022, 11, 23, 13, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 12, Group = "Grupo F", LocalId = "MAR", VisitorId = "CRO", CanDraw = true, Date = new DateTime(2022, 11, 23, 04, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 13, Group = "Grupo G", LocalId = "SUI", VisitorId = "CMR", CanDraw = true, Date = new DateTime(2022, 11, 24, 04, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 14, Group = "Grupo G", LocalId = "BRA", VisitorId = "SRB", CanDraw = true, Date = new DateTime(2022, 11, 24, 13, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 15, Group = "Grupo H", LocalId = "POR", VisitorId = "GHA", CanDraw = true, Date = new DateTime(2022, 11, 24, 10, 0, 0), QuinielaId = 1 },
+                new Match() { Id = 16, Group = "Grupo H", LocalId = "URU", VisitorId = "KOR", CanDraw = true, Date = new DateTime(2022, 11, 24, 07, 0, 0), QuinielaId = 1 },
 
                 //Jornada 2
-                new MatchGame() { Id = 17, Group = "Grupo B", LocalId = "WAL", VisitorId = "IRN", CanDraw = true, Date = new DateTime(2022, 11, 25, 04, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 18, Group = "Grupo A", LocalId = "QAT", VisitorId = "SEN", CanDraw = true, Date = new DateTime(2022, 11, 25, 07, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 19, Group = "Grupo A", LocalId = "NED", VisitorId = "ECU", CanDraw = true, Date = new DateTime(2022, 11, 25, 10, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 20, Group = "Grupo B", LocalId = "ENG", VisitorId = "USA", CanDraw = true, Date = new DateTime(2022, 11, 25, 13, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 21, Group = "Grupo D", LocalId = "TUN", VisitorId = "AUS", CanDraw = true, Date = new DateTime(2022, 11, 26, 04, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 22, Group = "Grupo C", LocalId = "POL", VisitorId = "KSA", CanDraw = true, Date = new DateTime(2022, 11, 26, 07, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 23, Group = "Grupo D", LocalId = "FRA", VisitorId = "DEN", CanDraw = true, Date = new DateTime(2022, 11, 26, 10, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 24, Group = "Grupo C", LocalId = "ARG", VisitorId = "MEX", CanDraw = true, Date = new DateTime(2022, 11, 26, 13, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 25, Group = "Grupo E", LocalId = "JPN", VisitorId = "CRC", CanDraw = true, Date = new DateTime(2022, 11, 27, 04, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 26, Group = "Grupo F", LocalId = "BEL", VisitorId = "MAR", CanDraw = true, Date = new DateTime(2022, 11, 27, 07, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 27, Group = "Grupo F", LocalId = "CRO", VisitorId = "CAN", CanDraw = true, Date = new DateTime(2022, 11, 27, 10, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 28, Group = "Grupo E", LocalId = "ESP", VisitorId = "GER", CanDraw = true, Date = new DateTime(2022, 11, 27, 13, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 29, Group = "Grupo G", LocalId = "CMR", VisitorId = "SRB", CanDraw = true, Date = new DateTime(2022, 11, 28, 04, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 30, Group = "Grupo H", LocalId = "KOR", VisitorId = "GHA", CanDraw = true, Date = new DateTime(2022, 11, 28, 07, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 31, Group = "Grupo G", LocalId = "BRA", VisitorId = "SUI", CanDraw = true, Date = new DateTime(2022, 11, 28, 10, 0, 0), QuinielaId = 2 },
-                new MatchGame() { Id = 32, Group = "Grupo H", LocalId = "POR", VisitorId = "URU", CanDraw = true, Date = new DateTime(2022, 11, 28, 13, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 17, Group = "Grupo B", LocalId = "WAL", VisitorId = "IRN", CanDraw = true, Date = new DateTime(2022, 11, 25, 04, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 18, Group = "Grupo A", LocalId = "QAT", VisitorId = "SEN", CanDraw = true, Date = new DateTime(2022, 11, 25, 07, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 19, Group = "Grupo A", LocalId = "NED", VisitorId = "ECU", CanDraw = true, Date = new DateTime(2022, 11, 25, 10, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 20, Group = "Grupo B", LocalId = "ENG", VisitorId = "USA", CanDraw = true, Date = new DateTime(2022, 11, 25, 13, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 21, Group = "Grupo D", LocalId = "TUN", VisitorId = "AUS", CanDraw = true, Date = new DateTime(2022, 11, 26, 04, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 22, Group = "Grupo C", LocalId = "POL", VisitorId = "KSA", CanDraw = true, Date = new DateTime(2022, 11, 26, 07, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 23, Group = "Grupo D", LocalId = "FRA", VisitorId = "DEN", CanDraw = true, Date = new DateTime(2022, 11, 26, 10, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 24, Group = "Grupo C", LocalId = "ARG", VisitorId = "MEX", CanDraw = true, Date = new DateTime(2022, 11, 26, 13, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 25, Group = "Grupo E", LocalId = "JPN", VisitorId = "CRC", CanDraw = true, Date = new DateTime(2022, 11, 27, 04, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 26, Group = "Grupo F", LocalId = "BEL", VisitorId = "MAR", CanDraw = true, Date = new DateTime(2022, 11, 27, 07, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 27, Group = "Grupo F", LocalId = "CRO", VisitorId = "CAN", CanDraw = true, Date = new DateTime(2022, 11, 27, 10, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 28, Group = "Grupo E", LocalId = "ESP", VisitorId = "GER", CanDraw = true, Date = new DateTime(2022, 11, 27, 13, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 29, Group = "Grupo G", LocalId = "CMR", VisitorId = "SRB", CanDraw = true, Date = new DateTime(2022, 11, 28, 04, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 30, Group = "Grupo H", LocalId = "KOR", VisitorId = "GHA", CanDraw = true, Date = new DateTime(2022, 11, 28, 07, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 31, Group = "Grupo G", LocalId = "BRA", VisitorId = "SUI", CanDraw = true, Date = new DateTime(2022, 11, 28, 10, 0, 0), QuinielaId = 2 },
+                new Match() { Id = 32, Group = "Grupo H", LocalId = "POR", VisitorId = "URU", CanDraw = true, Date = new DateTime(2022, 11, 28, 13, 0, 0), QuinielaId = 2 },
 
                 //Jornada 3
-                new MatchGame() { Id = 33, Group = "Grupo A", LocalId = "ECU", VisitorId = "SEN", CanDraw = true, Date = new DateTime(2022, 11, 29, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 34, Group = "Grupo A", LocalId = "NED", VisitorId = "QAT", CanDraw = true, Date = new DateTime(2022, 11, 29, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 35, Group = "Grupo B", LocalId = "IRN", VisitorId = "USA", CanDraw = true, Date = new DateTime(2022, 11, 29, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 36, Group = "Grupo B", LocalId = "WAL", VisitorId = "ENG", CanDraw = true, Date = new DateTime(2022, 11, 29, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 37, Group = "Grupo D", LocalId = "TUN", VisitorId = "FRA", CanDraw = true, Date = new DateTime(2022, 11, 30, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 38, Group = "Grupo D", LocalId = "AUS", VisitorId = "DEN", CanDraw = true, Date = new DateTime(2022, 11, 30, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 39, Group = "Grupo C", LocalId = "POL", VisitorId = "ARG", CanDraw = true, Date = new DateTime(2022, 11, 30, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 40, Group = "Grupo C", LocalId = "KSA", VisitorId = "MEX", CanDraw = true, Date = new DateTime(2022, 11, 30, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 41, Group = "Grupo F", LocalId = "CRO", VisitorId = "BEL", CanDraw = true, Date = new DateTime(2022, 12, 1, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 42, Group = "Grupo F", LocalId = "CAN", VisitorId = "MAR", CanDraw = true, Date = new DateTime(2022, 12, 1, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 43, Group = "Grupo E", LocalId = "JPN", VisitorId = "ESP", CanDraw = true, Date = new DateTime(2022, 12, 1, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 44, Group = "Grupo E", LocalId = "CRC", VisitorId = "GER", CanDraw = true, Date = new DateTime(2022, 12, 1, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 45, Group = "Grupo H", LocalId = "KOR", VisitorId = "POR", CanDraw = true, Date = new DateTime(2022, 12, 2, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 46, Group = "Grupo H", LocalId = "GHA", VisitorId = "URU", CanDraw = true, Date = new DateTime(2022, 12, 2, 09, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 47, Group = "Grupo G", LocalId = "SRB", VisitorId = "SUI", CanDraw = true, Date = new DateTime(2022, 12, 2, 13, 0, 0), QuinielaId = 3 },
-                new MatchGame() { Id = 48, Group = "Grupo G", LocalId = "CMR", VisitorId = "BRA", CanDraw = true, Date = new DateTime(2022, 12, 2, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 33, Group = "Grupo A", LocalId = "ECU", VisitorId = "SEN", CanDraw = true, Date = new DateTime(2022, 11, 29, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 34, Group = "Grupo A", LocalId = "NED", VisitorId = "QAT", CanDraw = true, Date = new DateTime(2022, 11, 29, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 35, Group = "Grupo B", LocalId = "IRN", VisitorId = "USA", CanDraw = true, Date = new DateTime(2022, 11, 29, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 36, Group = "Grupo B", LocalId = "WAL", VisitorId = "ENG", CanDraw = true, Date = new DateTime(2022, 11, 29, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 37, Group = "Grupo D", LocalId = "TUN", VisitorId = "FRA", CanDraw = true, Date = new DateTime(2022, 11, 30, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 38, Group = "Grupo D", LocalId = "AUS", VisitorId = "DEN", CanDraw = true, Date = new DateTime(2022, 11, 30, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 39, Group = "Grupo C", LocalId = "POL", VisitorId = "ARG", CanDraw = true, Date = new DateTime(2022, 11, 30, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 40, Group = "Grupo C", LocalId = "KSA", VisitorId = "MEX", CanDraw = true, Date = new DateTime(2022, 11, 30, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 41, Group = "Grupo F", LocalId = "CRO", VisitorId = "BEL", CanDraw = true, Date = new DateTime(2022, 12, 1, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 42, Group = "Grupo F", LocalId = "CAN", VisitorId = "MAR", CanDraw = true, Date = new DateTime(2022, 12, 1, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 43, Group = "Grupo E", LocalId = "JPN", VisitorId = "ESP", CanDraw = true, Date = new DateTime(2022, 12, 1, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 44, Group = "Grupo E", LocalId = "CRC", VisitorId = "GER", CanDraw = true, Date = new DateTime(2022, 12, 1, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 45, Group = "Grupo H", LocalId = "KOR", VisitorId = "POR", CanDraw = true, Date = new DateTime(2022, 12, 2, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 46, Group = "Grupo H", LocalId = "GHA", VisitorId = "URU", CanDraw = true, Date = new DateTime(2022, 12, 2, 09, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 47, Group = "Grupo G", LocalId = "SRB", VisitorId = "SUI", CanDraw = true, Date = new DateTime(2022, 12, 2, 13, 0, 0), QuinielaId = 3 },
+                new Match() { Id = 48, Group = "Grupo G", LocalId = "CMR", VisitorId = "BRA", CanDraw = true, Date = new DateTime(2022, 12, 2, 13, 0, 0), QuinielaId = 3 },
 
                 //Octavos de final
-                new MatchGame() { Id = 49, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 3, 09, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 50, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 3, 13, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 51, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 4, 09, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 52, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 4, 13, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 53, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 5, 09, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 54, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 5, 13, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 55, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 6, 09, 0, 0), QuinielaId = 4 },
-                new MatchGame() { Id = 56, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 6, 13, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 49, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 3, 09, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 50, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 3, 13, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 51, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 4, 09, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 52, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 4, 13, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 53, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 5, 09, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 54, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 5, 13, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 55, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 6, 09, 0, 0), QuinielaId = 4 },
+                new Match() { Id = 56, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 6, 13, 0, 0), QuinielaId = 4 },
 
                 //Cuartos de final
-                new MatchGame() { Id = 57, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 9, 09, 0, 0), QuinielaId = 5 },
-                new MatchGame() { Id = 58, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 9, 13, 0, 0), QuinielaId = 5 },
-                new MatchGame() { Id = 59, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 10, 09, 0, 0), QuinielaId = 5 },
-                new MatchGame() { Id = 60, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 10, 13, 0, 0), QuinielaId = 5 },
+                new Match() { Id = 57, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 9, 09, 0, 0), QuinielaId = 5 },
+                new Match() { Id = 58, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 9, 13, 0, 0), QuinielaId = 5 },
+                new Match() { Id = 59, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 10, 09, 0, 0), QuinielaId = 5 },
+                new Match() { Id = 60, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 10, 13, 0, 0), QuinielaId = 5 },
 
                 //Semifinal
-                new MatchGame() { Id = 61, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 13, 13, 0, 0), QuinielaId = 6 },
-                new MatchGame() { Id = 62, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 14, 13, 0, 0), QuinielaId = 6 },
+                new Match() { Id = 61, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 13, 13, 0, 0), QuinielaId = 6 },
+                new Match() { Id = 62, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 14, 13, 0, 0), QuinielaId = 6 },
 
                 //Final
-                new MatchGame() { Id = 63, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 17, 9, 0, 0), QuinielaId = 7 },
-                new MatchGame() { Id = 64, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 18, 9, 0, 0), QuinielaId = 7 }
+                new Match() { Id = 63, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 17, 9, 0, 0), QuinielaId = 7 },
+                new Match() { Id = 64, Group = "", LocalId = "N/A", VisitorId = "N/A", CanDraw = false, Date = new DateTime(2022, 12, 18, 9, 0, 0), QuinielaId = 7 }
                 );
 
             modelBuilder.Entity<Activity>().HasData(

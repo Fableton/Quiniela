@@ -109,7 +109,7 @@ namespace Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.MatchGame", b =>
+            modelBuilder.Entity("Entities.Match", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,7 +155,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("VisitorId");
 
-                    b.ToTable("MatchGames", (string)null);
+                    b.ToTable("Matchs", (string)null);
 
                     b.HasData(
                         new
@@ -1016,22 +1016,70 @@ namespace Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.PlayerMatchResult", b =>
+            modelBuilder.Entity("Entities.PlayerGameResult", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("MatchId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MatchGameId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.Property<int>("Result")
                         .HasColumnType("int");
 
-                    b.HasKey("PlayerId", "MatchGameId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("MatchGameId");
+                    b.HasIndex("MatchId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("PlayerMatchResult", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Answer")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Ended")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Group")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuinielaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuinielaId");
+
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Quiniela", b =>
@@ -1415,22 +1463,22 @@ namespace Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.MatchGame", b =>
+            modelBuilder.Entity("Entities.Match", b =>
                 {
                     b.HasOne("Entities.Team", "Local")
-                        .WithMany("LocalGames")
+                        .WithMany("LocalMatchs")
                         .HasForeignKey("LocalId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Entities.Quiniela", "Quiniela")
-                        .WithMany("Matches")
+                        .WithMany("Matchs")
                         .HasForeignKey("QuinielaId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Entities.Team", "Visitor")
-                        .WithMany("VisitorsGames")
+                        .WithMany("VisitorMatchs")
                         .HasForeignKey("VisitorId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -1442,13 +1490,12 @@ namespace Repository.Migrations
                     b.Navigation("Visitor");
                 });
 
-            modelBuilder.Entity("Entities.PlayerMatchResult", b =>
+            modelBuilder.Entity("Entities.PlayerGameResult", b =>
                 {
-                    b.HasOne("Entities.MatchGame", "MatchGame")
+                    b.HasOne("Entities.Match", "Match")
                         .WithMany("MatchResults")
-                        .HasForeignKey("MatchGameId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Entities.Player", "Player")
                         .WithMany("MatchResults")
@@ -1456,9 +1503,27 @@ namespace Repository.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("MatchGame");
+                    b.HasOne("Entities.Question", "Question")
+                        .WithMany("QuestionResults")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Match");
 
                     b.Navigation("Player");
+
+                    b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("Entities.Question", b =>
+                {
+                    b.HasOne("Entities.Quiniela", "Quiniela")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuinielaId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Quiniela");
                 });
 
             modelBuilder.Entity("Entities.Quiniela", b =>
@@ -1502,7 +1567,7 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.MatchGame", b =>
+            modelBuilder.Entity("Entities.Match", b =>
                 {
                     b.Navigation("MatchResults");
                 });
@@ -1512,16 +1577,23 @@ namespace Repository.Migrations
                     b.Navigation("MatchResults");
                 });
 
+            modelBuilder.Entity("Entities.Question", b =>
+                {
+                    b.Navigation("QuestionResults");
+                });
+
             modelBuilder.Entity("Entities.Quiniela", b =>
                 {
-                    b.Navigation("Matches");
+                    b.Navigation("Matchs");
+
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("Entities.Team", b =>
                 {
-                    b.Navigation("LocalGames");
+                    b.Navigation("LocalMatchs");
 
-                    b.Navigation("VisitorsGames");
+                    b.Navigation("VisitorMatchs");
                 });
 
             modelBuilder.Entity("Entities.Tournament", b =>

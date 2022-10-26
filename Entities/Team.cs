@@ -11,7 +11,7 @@ namespace Entities
 
         public string Name { get; set; }
 
-        public virtual ICollection<MatchGame> LocalGames { get; set; }
-        public virtual ICollection<MatchGame> VisitorsGames { get; set; }
+        public virtual ICollection<Match> LocalMatchs { get; set; }
+        public virtual ICollection<Match> VisitorMatchs { get; set; }
     }
 }

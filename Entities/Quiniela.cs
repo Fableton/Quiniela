@@ -21,8 +21,11 @@ namespace Entities
         public DateTime EndDate { get; set; }
 
         public int TournamentId { get; set; }
-        public virtual IEnumerable<MatchGame> Matches { get; set; }
+        public virtual IEnumerable<Match> Matchs { get; set; }
+
+        public virtual IEnumerable<Question> Questions { get; set; }
 
         public virtual Tournament Tournament { get; set; }
+
     }
 }

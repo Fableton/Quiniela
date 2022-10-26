@@ -1,6 +1,6 @@
 ﻿@using QuinielaUI.Areas.Scores.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model List<Match>
+@model List<MatchDTO>
 @{
 }
 
@@ -71,6 +71,7 @@
 
         .actualMatch_ItemCointainer .resulItem {
             grid-area: resul;
+            padding-top: 7px;
         }
 
         .actualMatch_ItemCointainer .emoteItem {
@@ -86,12 +87,19 @@
             background-color: black;
         }
 
+            .actualMatch_ItemCointainer img.emote {
+                height: 31px;
+                width: 31px;
+                background-color: transparent;
+                border-width: 0px;
+            }
+
     .roundedicon {
     }
 </style>
 @if (Model.Count != 0)
 {
-    @foreach (Match match in Model)
+    @foreach (MatchDTO match in Model)
     {
         <div style="display:none">@match.MatchId</div>
         <div class="actualMatch_ItemCointainer">
@@ -137,15 +145,15 @@
             <div class="emoteItem">
                 @if (match.IsWining == true)
                 {
-                    <i class="bi bi-emoji-smile-fill" style="font-size: 2rem; color:#FDD800 ;"></i>
+                    <img class="emote" src="~/img/emoji/smilingface.png" alt="Bootstrap">
                 }
                 else if (match.IsWining == false)
                 {
-                    <i class="bi bi-emoji-frown-fill" style="font-size: 2rem; color: #F0483E;"></i>
+                    <img class="emote" src="~/img/emoji/cryingface.png" alt="Bootstrap">
                 }
                 else
                 {
-                    <i class="bi bi-emoji-expressionless-fill" style="font-size: 2rem; color: gray;"></i>
+                    <img class="emote" src="~/img/emoji/expressionlessface.png" alt="Bootstrap">
                 }
             </div>
         </div>

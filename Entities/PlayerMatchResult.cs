@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class PlayerMatchResult
+    public class PlayerGameResult
     {
+        [Key]
+        public int Id { get; set; }
         public int PlayerId { get; set; }
-        public int MatchGameId { get; set; }
+
+        public int? MatchId { get; set; }
+
+        public int? QuestionId { get; set; }
+
         /// <summary>
         /// 1 - LocalWin
         /// 2 - VisitorWin
@@ -21,7 +28,9 @@ namespace Entities
 
         public virtual Player Player { get; set; }
 
-        public virtual MatchGame MatchGame { get; set; }
+        public virtual Match? Match { get; set; }
+
+        public virtual Question? Question { get; set; }
 
         [NotMapped]
         public bool IsWin
@@ -29,18 +38,24 @@ namespace Entities
             get
             {
                 bool isWin = false;
+                if (this.MatchId != null)
+                {
+                    if (this.Match.LocalGoals == this.Match.VisitorGoals && this.Match.CanDraw)
+                    {
+                        isWin = this.Result == 3;
+                    }
+                    else if (this.Match.LocalGoals > this.Match.VisitorGoals)
+                    {
+                        isWin = this.Result == 1;
+                    }
+                    else if (this.Match.VisitorGoals > this.Match.LocalGoals)
+                    {
+                        isWin = this.Result == 2;
+                    }
+                }
+                else if (this.QuestionId != null)
+                {
 
-                if (this.MatchGame.LocalGoals == this.MatchGame.VisitorGoals && this.MatchGame.CanDraw)
-                {
-                    isWin = this.Result == 3;
-                }
-                else if (this.MatchGame.LocalGoals > this.MatchGame.VisitorGoals)
-                {
-                    isWin = this.Result == 1;
-                }
-                else if (this.MatchGame.VisitorGoals > this.MatchGame.LocalGoals)
-                {
-                    isWin = this.Result == 2;
                 }
 
                 return isWin;

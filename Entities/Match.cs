@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class MatchGame
+    public class Match
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
 
+        public int QuinielaId { get; set; }
+
         public DateTime Date { get; set; }
+
+        public string Group { get; set; }
+
+        public bool Ended { get; set; }
 
         public int LocalGoals { get; set; }
 
@@ -26,12 +33,6 @@ namespace Entities
 
         public string LocalId { get; set; }
 
-        public string Group { get; set; }
-
-        public int QuinielaId { get; set; }
-
-        public bool Ended { get; set; }
-
         [ForeignKey("VisitorId")]
         public virtual Team Visitor { get; set; }
         [ForeignKey("LocalId")]
@@ -40,6 +41,6 @@ namespace Entities
         [ForeignKey("QuinielaId")]
         public virtual Quiniela Quiniela { get; set; }
 
-        public virtual IEnumerable<PlayerMatchResult> MatchResults { get; set; }
+        public virtual IEnumerable<PlayerGameResult> MatchResults { get; set; }
     }
 }

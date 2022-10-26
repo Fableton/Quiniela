@@ -1,6 +1,6 @@
 ﻿namespace QuinielaUI.Areas.Scores.Models
 {
-    public class Match
+    public class MatchDTO
     {
         public int MatchId { get; set; }
         public string LocalID { get; set; }
